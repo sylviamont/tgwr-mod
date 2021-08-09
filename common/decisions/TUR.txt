@@ -1,49 +1,110 @@
-foreign_politics = {
-	TUR_balkan_war_intervention_decision = {
+peace_deals = {
+	TUR_sue_for_peace_ITA = {
 		allowed = {
-			original_tag = TUR
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = ITA
+			}
 		}
 		available = {
-			NOT = { has_global_flag = kis_war }
-			BUL = { has_war_with = SER owns_state = 756 }
-			TUR = {
+			has_war_with = ITA
+			OR = {
 				is_in_faction = no
+				ITA = {
+					is_in_faction = no
+				}
+				has_global_flag = kis_firstbalkan_war
 			}
 		}
 		visible = {
-			NOT = { has_global_flag = kis_war }
-			OR = {
-				NOT = { has_global_flag = kis_secondbalkanwar_victory }
-				NOT = { has_global_flag = kis_secondbalkanwar_lose }
+			has_global_flag = italo_turkish_war
+			NOT = {
+				has_global_flag = kis_war
 			}
-			BUL = { has_war_with = SER }
+			NOT = {
+				has_global_flag = italo_turkish_war_ends
+			}
+			NOT = {
+				has_country_flag = ITA_lybian_war_mission_timeout
+			}
+			owns_state = 448
+			owns_state = 450
+			owns_state = 661
 		}
-		fire_only_once = yes		
-		days_remove = 10
+		fire_only_once = yes
 		ai_will_do = {
-			factor = 100
+			base = 500
 			modifier = {
-				factor = 0
-				GRE = { NOT = { is_in_faction_with = SER } }
+				add = -500
+				casualties < 100000
+				surrender_progress < 0.1
+				NOT = {
+					ITA = {
+						has_full_control_of_state = 448
+						has_full_control_of_state = 450
+						has_full_control_of_state = 661
+					}
+				}
+			}
+			modifier = {
+				add = 500
+				OR = {
+					casualties > 300000
+					surrender_progress > 0.2
+				}
+				NOT = {
+					has_war_with = BUL
+					has_war_with = SER
+				}
+			}
+			modifier = {
+				add = 500
+				OR = {
+					has_war_with = BUL
+					has_war_with = SER
+				}
+				ITA = {
+					OR = {
+						controls_state = 448
+						controls_state = 450
+						controls_state = 661
+					}
+					surrender_progress < 0.05
+				}
 			}
 		}
-		remove_effect = {
-			country_event = { id = ww1_secondbalkan.9 }	
+		complete_effect = {
+			ITA = {
+				country_event = {
+					id = ww1_italianturkish.4
+				}
+			}
 		}
 	}
-	TUR_sue_for_peace_SER = {	
+	TUR_sue_for_peace_SER = {
 		allowed = {
 			original_tag = TUR
 		}
-		available = {	
-			NOT = { has_global_flag = kis_war} 
-			NOT = { has_global_flag = kis_firstbalkanwar_victory }			
+		target_trigger = {
+			FROM = {
+				tag = SER
+			}
+		}
+		available = {
+			NOT = {
+				has_global_flag = kis_war
+			}
+			NOT = {
+				has_global_flag = kis_firstbalkanwar_victory
+			}
 			has_war_with = SER
 			OR = {
 				surrender_progress > 0.3
 				casualties > 60000
-				AND = {
-					NOT = {
+				NOT = {
+					AND = {
 						controls_state = 44
 						controls_state = 106
 						controls_state = 184
@@ -56,107 +117,134 @@ foreign_politics = {
 						controls_state = 761
 						controls_state = 788
 					}
-			    }
+				}
 			}
 			is_in_faction = no
-			NOT = { has_global_flag = TUR_peace_SER }
+			NOT = {
+				has_global_flag = TUR_peace_SER
+			}
 		}
 		visible = {
-			OR = {
-		       	has_global_flag = kis_firstbalkan_war
-		    	has_global_flag = kis_firstbalkan_war_slavic
-		    }
-			NOT = { has_global_flag = kis_war} 
-			NOT = { has_global_flag = kis_firstbalkanwar_victory }
-			NOT = { has_global_flag = TUR_peace_SER }
+			has_war_with = SER
+			has_global_flag = kis_firstbalkan_war
+			NOT = {
+				has_global_flag = kis_war
+				has_global_flag = kis_firstbalkanwar_victory
+				has_global_flag = TUR_peace_SER
+			}
 		}
 		ai_will_do = {
-			factor = 500
+			base = 500
 			modifier = {
 				factor = 0
 				date < 1913.3.30
-				casualties < 120000
-				surrender_progress < 0.5
+				casualties < 300000
+				surrender_progress < 0.2
 			}
 		}
 		complete_effect = {
 			SER = {
-				country_event = { id = ww1_firstbalkan.6 }
+				country_event = {
+					id = ww1_firstbalkan.6
+					hours = 1
+				}
 			}
 			set_global_flag = TUR_peace_SER
 		}
-	}	
-	TUR_sue_for_peace_ITA = {
+	}
+}
+
+operations = {
+	TUR_balkan_war_intervention_decision = {
 		allowed = {
 			original_tag = TUR
 		}
-		available = {
-			NOT = { has_global_flag = kis_war }
-			NOT = { has_global_flag = italo_turkish_war_ends }
-			TUR = { has_war_with = ITA }
-			OR = {	
-				casualties > 35000				
-				surrender_progress > 0.1				
-				ITA = {
-					controls_state = 448
-					controls_state = 449
-					controls_state = 450
-					controls_state = 451
-				}
+		target_trigger = {
+			FROM = {
+				tag = BUL
 			}
-			OR = {
-				TUR = { is_in_faction = no }
-				ITA = { is_in_faction = no }
-			}
-			NOT = { has_global_flag = TUR_peace_ITA }
-		}
-		visible = {
-			has_global_flag = italo_turkish_war
-			NOT = { has_global_flag = kis_war }
-			NOT = { has_global_flag = italo_turkish_war_ends }
-			NOT = { has_global_flag = TUR_peace_ITA }
-		}
-		ai_will_do = {
-			factor = 500
-		}
-		complete_effect = {
-			ITA = {
-				country_event = { id = ww1_italianturkish.4 }
-			}
-			set_global_flag = TUR_peace_ITA
-		}
-	}	
-	TUR_sue_for_peace_GRE = {	
-		allowed = {
-			original_tag = TUR
 		}
 		available = {
-			has_global_flag = interwar_greco_turkish_war
-			OR = {
-				TUR = {
-					has_war_with = GRE
-					surrender_progress > 0.5
-				}
-				GRE = {
-					controls_state = 49
-				}
-			}	
+			is_subject = no
+			BUL = {
+				has_war_with = SER
+				owns_state = 756
+			}
+			TUR = {
+				is_in_faction = no
+			}
+			ROM = {
+				has_war_with = BUL
+			}
 		}
 		visible = {
-			has_war_with = GRE
-			has_global_flag = interwar_greco_turkish_war
 			NOT = {
-				has_global_flag = GRE_takes_constantinople_flag
+				has_global_flag = kis_secondbalkanwar_victory
+			}
+			NOT = {
+				has_global_flag = kis_secondbalkanwar_lose
+			}
+			BUL = {
+				has_war_with = SER
+			}
+			NOT = {
+				is_in_faction_with = GER
+				has_war_together_with = GER
+				is_in_faction_with = FRA
+				has_war_together_with = FRA
+			}
+			SER = {
+				NOT = {
+					is_in_faction_with = GER
+					has_war_together_with = GER
+					is_in_faction_with = FRA
+					has_war_together_with = FRA
+				}
+			}
+			BUL = {
+				NOT = {
+					is_in_faction_with = GER
+					has_war_together_with = GER
+					is_in_faction_with = FRA
+					has_war_together_with = FRA
+				}
 			}
 		}
-		cost = 0
 		fire_only_once = yes
+		days_remove = 10
 		ai_will_do = {
 			factor = 100
+			modifier = {
+				factor = 0
+				OR = {
+					ROM = {
+						OR = {
+							has_capitulated = yes
+							surrender_progress > 0.1
+						}
+					}
+					SER = {
+						OR = {
+							has_capitulated = yes
+							surrender_progress > 0.1
+						}
+					}
+					AND = {
+						GRE = {
+							has_war_with = BUL
+							OR = {
+								has_capitulated = yes
+								surrender_progress > 0.1
+							}
+						}
+					}
+				}
+			}
 		}
-		complete_effect = {
-			GRE = {
-				country_event = { id = ww1_greece.7 }
+		war_with_on_remove = BUL
+		remove_effect = {
+			country_event = {
+				id = ww1_secondbalkan.9
 			}
 		}
 	}
@@ -169,27 +257,28 @@ foreign_politics = {
 		fire_only_once = yes
 		days_remove = 30
 		modifier = {
-			
 		}
 		available = {
 			has_equipment = {
-				infantry_equipment > 3999
+				infantry_equipment > 6000
 			}
 		}
 		visible = {
 			has_completed_focus = TUR_asian_independence_committee
 		}
-		complete_effect = {	
+		complete_effect = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
-				amount = -4000
-            }
+				amount = -6000
+			}
 		}
 		remove_effect = {
-			RAJ = { country_event = ww1_ottoman.102 }
+			RAJ = {
+				country_event = ww1_ottoman.102
+			}
 		}
 		ai_will_do = {
-			factor = 100
+			base = 100
 		}
 	}
 	TUR_raise_rebellion_in_ins = {
@@ -201,24 +290,25 @@ foreign_politics = {
 		fire_only_once = yes
 		days_remove = 30
 		modifier = {
-			
 		}
 		available = {
 			has_equipment = {
-				infantry_equipment > 2999
+				infantry_equipment > 5000
 			}
 		}
 		visible = {
 			has_completed_focus = TUR_asian_independence_committee
 		}
-		complete_effect = {	
+		complete_effect = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
-				amount = -3000
-            }
+				amount = -5000
+			}
 		}
 		remove_effect = {
-			INS = { country_event = ww1_ottoman.101 }
+			INS = {
+				country_event = ww1_ottoman.101
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -233,24 +323,25 @@ foreign_politics = {
 		fire_only_once = yes
 		days_remove = 30
 		modifier = {
-			
 		}
 		available = {
 			has_equipment = {
-				infantry_equipment > 1999
+				infantry_equipment > 3000
 			}
 		}
 		visible = {
 			has_completed_focus = TUR_asian_independence_committee
 		}
-		complete_effect = {	
+		complete_effect = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
-				amount = -2000
-            }
+				amount = -3000
+			}
 		}
 		remove_effect = {
-			MAL = { country_event = ww1_ottoman.103 }
+			MAL = {
+				country_event = ww1_ottoman.103
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -286,7 +377,7 @@ foreign_politics = {
 		}
 		fire_only_once = yes
 		days_remove = 10
-		cost = 100
+		cost = 25
 		ai_will_do = {
 			factor = 100
 		}
@@ -300,256 +391,350 @@ foreign_politics = {
 		}
 	}
 }
+
 crisis = {
-	TUR_anxiety_in_vilayets = {
-		allowed = {
-			original_tag = TUR
-		}	
-		icon = tur_unifying_the_country
-		available = { #GOAL
-			all_owned_state = {
-				NOT = {
-					has_dynamic_modifier = { modifier = loyal_vilayet }
-				}
-				NOT = {
-					has_dynamic_modifier = { modifier = placated_vilayet }
-				}
-			}
-		}
-		activation = {
-			always = no
-		}
-		days_mission_timeout = 90
-		timeout_effect = {
-			random_list = {
-				50 = {
-					random_owned_state = {
-						limit = { 
-							has_dynamic_modifier = { modifier = loyal_vilayet } 
-						}
-					add_dynamic_modifier = { modifier = placated_vilayet }
-					remove_dynamic_modifier = { modifier = placated_vilayet }
-					}
-				}
-				50 = {
-					random_owned_state = {
-						limit = { 
-							has_dynamic_modifier = { modifier = placated_vilayet } 
-						}
-						remove_dynamic_modifier = { modifier = autonomy_vilayet }
-					}
-				}
-			}
-		}
-		
-		fire_only_once = no
-		is_good = no
-	}
 	TUR_CUP_prepares_coup_mission = {
 		allowed = {
 			original_tag = TUR
-		}	
+		}
 		icon = tur_unifying_the_country
-		available = { #GOAL
+		available = {
+			#GOAL
 			OR = {
 				has_civil_war = yes
-				has_completed_focus = TUR_unity_and_progress
-				has_completed_focus = TUR_freedom_and_accord
-				has_completed_focus = TUR_ittihadi_muhammedi
-				has_completed_focus = TUR_istirak_mukavemet
+				has_completed_focus = TUR_raid_on_the_sublime_porte
 			}
 		}
 		activation = {
 			always = no
 		}
-		timeout_effect = { #FAIL
-			add_stability = -0.10
-			add_popularity = { ideology = fascism popularity = 0.15 }
-			add_popularity = { ideology = neutrality popularity = 0.20 }
-			unlock_national_focus = TUR_unity_and_progress
+		timeout_effect = {
+			#FAIL
+			add_stability = -0.1
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.2
+			}
 			complete_national_focus = TUR_raid_on_the_sublime_porte
 		}
-		complete_effect = { #SUCCESS
-			
+		complete_effect = {
+			#SUCCESS
 		}
 		fire_only_once = yes
-		days_mission_timeout = 120
+		days_mission_timeout = 90
 		is_good = no
 	}
-	TUR_conspiracy_against_the_accord_and_freedom = { #sevket path
-		icon = GFX_decision_generic_operation
-
-		ai_will_do = {
-			base = 1
+	TUR_saviour_officer_coup_mission = {
+		allowed = {
+			original_tag = TUR
 		}
-		allowed = { original_tag = TUR }
-
-		available = { #GOAL
+		icon = tur_unifying_the_country
+		days_mission_timeout = 80
+		fire_only_once = yes
+		is_good = no
+		available = {
 			OR = {
-				has_civil_war = yes
-				has_completed_focus = TUR_protect_democracy
+				has_government = democratic
+				has_completed_focus = TUR_coup_of_savior_officers
+				focus_progress = {
+					focus = TUR_ittihadi_muhammedi
+					progress > 0
+				}
+				has_completed_focus = TUR_ittihadi_muhammedi
+				has_completed_focus = TUR_istirak_mukavemet
+				focus_progress = {
+					focus = TUR_istirak_mukavemet
+					progress > 0
+				}
+				has_completed_focus = TUR_yildiz_teskilati
+				has_completed_focus = TUR_depoliticize_the_army
 			}
 		}
-
 		activation = {
-			always = no
+			has_country_flag = elections_1912
+			has_completed_focus = TUR_harbiyeli
 		}
-
-		days_mission_timeout = 120
-
-		fire_only_once = yes
-		is_good = no
-		
-		timeout_effect = { #FAIL
-			country_event = ww1_ottoman.33
+		timeout_effect = {
+			complete_national_focus = TUR_coup_of_savior_officers
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			country_event = generic.27
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = TUR_weaken_the_sultans_power
+					}
+				}
+				unlock_national_focus = TUR_weaken_the_sultans_power
+			}
+		}
+		complete_effect = {
 		}
 	}
-	TUR_conspiracy_against_the_sultan = { #united and ready path
+	TUR_revolt_against_islamists_mission = {
+		allowed = {
+			original_tag = TUR
+		}
+		available = {
+			OR = {
+				has_civil_war = yes
+				has_government = fascism
+				has_government = democratic
+				has_completed_focus = TUR_compromise_with_ittihadists
+			}
+		}
+		activation = {
+			has_completed_focus = TUR_ittihadi_muhammedi
+		}
+		is_good = no
+		fire_only_once = yes
+		timeout_effect = {
+			country_event = ww1_ottoman.22
+		}
+		days_mission_timeout = 100
+		complete_effect = {
+			add_stability = 0.05
+		}
+	}
+	TUR_conspiracy_against_the_sultan = {
+		#united and ready path
 		icon = GFX_decision_generic_operation
-
 		ai_will_do = {
 			base = 1
 		}
-		allowed = { original_tag = TUR }
-
-		available = { #GOAL
+		allowed = {
+			original_tag = TUR
+		}
+		available = {
+			#GOAL
 			has_completed_focus = TUR_united_and_ready
 		}
 		activation = {
 			always = no
-		}		
-		visible = {
-			
 		}
-		days_mission_timeout = 160
-
+		visible = {
+		}
+		days_mission_timeout = 220
 		fire_only_once = yes
 		is_good = no
-		
-		timeout_effect = { #FAIL
+		timeout_effect = {
+			#FAIL
 			country_event = ww1_ottoman.26
 		}
-
-		complete_effect = { #SUCCESS
-			
+		complete_effect = {
+			#SUCCESS
 		}
 	}
-	TUR_harbiyeli_officers_plot = { #reactionary path
+	TUR_harbiyeli_officers_plot = {
+		#reactionary path
 		icon = GFX_decision_generic_operation
-
 		ai_will_do = {
 			base = 1
 		}
-		allowed = { original_tag = TUR }
-
-		available = { #GOAL
-			has_completed_focus = TUR_purge_the_officers
+		allowed = {
+			original_tag = TUR
 		}
-
+		available = {
+			has_completed_focus = TUR_reshape_the_army
+		}
 		activation = {
 			always = no
 		}
-		
 		visible = {
-			
 		}
-
 		days_mission_timeout = 160
-
 		fire_only_once = yes
 		is_good = no
-		
-		timeout_effect = { #FAIL
+		timeout_effect = {
+			#FAIL
 			country_event = ww1_ottoman.35
 		}
-
-		complete_effect = { #SUCCESS
-
-		}
-	}
-	
-	TUR_collapse_of_the_empire = { #islamist path после прихода исламистов нацменьшинства на ближнем востоке поднимут восстание, чтобы избежать террора
-		icon = GFX_decision_generic_operation
-
-		ai_will_do = {
-			base = 1
-		}
-		allowed = { original_tag = TUR }
-
-		available = { #GOAL
-
-		}
-
-		activation = {
-			always = no
-		}
-		
-		visible = {
-			
-		}
-
-		days_mission_timeout = 730
-
-		fire_only_once = yes
-		is_good = no
-		
-		timeout_effect = { #FAIL
-
-		}
-
-		complete_effect = { #SUCCESS
-
-		}
-	}
-	TUR_ottoman_socialist_revolution_mission = { #socialist revolution while civil war
-		icon = GFX_decision_generic_operation
-
-		ai_will_do = {
-			base = 1
-		}
-		allowed = { original_tag = TUR }
-
-		available = { #GOAL
-			OR = {
-				has_civil_war = no
-				has_government = communism
-			}
-		}
-
-		activation = {
-			has_civil_war = yes
-			has_country_flag = TUR_socialist_revolution_timer
-			NOT = { has_government = communism }
-		}
-		
-		visible = {
-			
-		}
-
-		days_mission_timeout = 90
-
-		fire_only_once = yes
-		is_good = no
-		
-		timeout_effect = { #FAIL
-			start_civil_war = {
-				ideology = communism
-				size = 0.20
-				keep_unit_leaders_trigger = {
-			    	always = yes
-			    }
-			}
-		}
-
-		complete_effect = { #SUCCESS
-
+		complete_effect = {
+			#SUCCESS
 		}
 	}
 }
+
 political_actions = {
-	TUR_reorganize_officers = { #just for focus icon
-		allowed = { tag = TUR }
-		visible = { always = no }
+	TUR_ratify_the_treaty_of_daan = {
+		icon = GFX_decision_infiltrate_state
+		allowed = {
+			original_tag = TUR
+		}
+		available = {
+			is_subject = no
+		}
+		visible = {
+			has_country_flag = daan_treaty_signed
+			YEM = {
+				exists = no
+			}
+			any_owned_state = {
+				is_core_of = YEM
+			}
+		}
+		cost = 20
+		fire_only_once = yes
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1000
+				date > 1913.9.22
+			}
+		}
+		complete_effect = {
+			add_stability = 0.05
+			if = {
+				limit = {
+					owns_state = 293
+				}
+				YEM = {
+					transfer_state = 293
+				}
+				hidden_effect = {
+					add_state_claim = PREV
+				}
+				else = {
+					random_owned_state = {
+						limit = {
+							is_core_of = YEM
+						}
+						YEM = {
+							transfer_state = PREV
+						}
+						hidden_effect = {
+							ROOT = {
+								add_state_claim = PREV
+							}
+						}
+					}
+				}
+			}
+			puppet = YEM
+			hidden_effect = {
+				YEM = {
+					set_politics = {
+						ruling_party = neutrality
+						elections_allowed = no
+					}
+					set_popularities = {
+						neutrality = 100
+					}
+					load_oob = "YEM_1910"
+				}
+			}
+		}
+	}
+	TUR_declare_jihad = {
+		icon = GFX_decision_generic_nationalism
+		allowed = {
+			original_tag = TUR
+		}
+		available = {
+			has_global_flag = kis_war
+			has_war = yes
+		}
+		visible = {
+			NOT = {
+				has_completed_focus = TUR_istirak_mukavemet
+			}
+		}
+		cost = 50
+		fire_only_once = yes
+		complete_effect = {
+			add_war_support = 0.05
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = SAU
+						is_core_of = JBS
+						is_core_of = IRQ
+						is_core_of = SYR
+						is_core_of = PAL
+						is_core_of = KUW
+						is_core_of = QAT
+						is_core_of = ALB
+						is_core_of = PER
+						is_core_of = HJZ
+						is_core_of = ASR
+						is_core_of = YEM
+						is_core_of = EGY
+						is_core_of = LBA
+					}
+					NOT = {
+						is_core_of = TUR
+					}
+				}
+				add_compliance = 10
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						DAR = {
+							is_subject_of = ENG
+						}
+					}
+					DAR = {
+						country_event = ww1_ottoman.70
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	TUR_dissolve_meclis_saviour_officers = {
+		allowed = {
+			original_tag = TUR
+		}
+		fire_only_once = yes
+		cost = 100
+		days_remove = 20
+		visible = {
+			NOT = {
+				has_country_flag = meclis_dissolved
+			}
+			OR = {
+				has_country_leader = {
+					name = "Ahmed Muhtar Paşa"
+					ruling_only = yes
+				}
+				has_country_leader = {
+					name = "Mehmed Kamil Paşa"
+					ruling_only = yes
+				}
+			}
+			has_idea = TUR_government_without_majority
+		}
+		remove_effect = {
+			custom_effect_tooltip = "Meclis will be dissolved."
+			set_country_flag = meclis_dissolved
+			add_stability = -0.05
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.02
+			}
+			remove_ideas = TUR_government_without_majority
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	TUR_reorganize_officers = {
+		#just for focus icon
+		allowed = {
+			tag = TUR
+		}
+		visible = {
+			always = no
+		}
 	}
 	TUR_reorganize_officers_depoliticize_staff = {
 		allowed = {
@@ -559,7 +744,7 @@ political_actions = {
 		cost = 15
 		fire_only_once = no
 		days_remove = 30
-		days_re_enable = 60
+		days_re_enable = 30
 		visible = {
 			has_completed_focus = TUR_depoliticize_the_army
 			OR = {
@@ -576,10 +761,16 @@ political_actions = {
 				has_idea = TUR_officers_struggle_depoliticize_1_org_final
 				has_idea = TUR_officers_struggle_depoliticize_2_org_final
 			}
-			NOT = { has_country_flag = officers_reorganize_active }
+			NOT = {
+				has_country_flag = officers_reorganize_active
+			}
 		}
 		complete_effect = {
-			set_country_flag = { flag = officers_reorganize_active  days = 30 value = 1 }
+			set_country_flag = {
+				flag = officers_reorganize_active
+				days = 30
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_reunite_officers_command_level_down = yes
@@ -594,10 +785,10 @@ political_actions = {
 			tag = TUR
 		}
 		icon = generic_military
-		cost = 15
+		cost = 20
 		fire_only_once = no
 		days_remove = 30
-		days_re_enable = 60
+		days_re_enable = 30
 		visible = {
 			has_completed_focus = TUR_depoliticize_the_army
 			OR = {
@@ -614,10 +805,16 @@ political_actions = {
 				has_idea = TUR_officers_struggle_depoliticize_1_org_final
 				has_idea = TUR_officers_struggle_depoliticize_2_org_final
 			}
-			NOT = { has_country_flag = officers_reorganize_active }
+			NOT = {
+				has_country_flag = officers_reorganize_active
+			}
 		}
 		complete_effect = {
-			set_country_flag = { flag = officers_reorganize_active  days = 30 value = 1 }
+			set_country_flag = {
+				flag = officers_reorganize_active
+				days = 30
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_reunite_officers_org_level_down = yes
@@ -635,7 +832,7 @@ political_actions = {
 		cost = 50
 		fire_only_once = no
 		days_remove = 30
-		days_re_enable = 60
+		days_re_enable = 30
 		visible = {
 			has_completed_focus = TUR_depoliticize_the_army
 			OR = {
@@ -657,9 +854,9 @@ political_actions = {
 		icon = generic_military
 		cost = 50
 		fire_only_once = no
-		days_re_enable = 30
+		days_remove = 60
+		days_re_enable = 120
 		visible = {
-			has_completed_focus = TUR_purge_the_officers
 			has_completed_focus = TUR_yildiz_teskilati
 			OR = {
 				has_idea = TUR_officers_struggle_yildiz_bonus
@@ -668,6 +865,7 @@ political_actions = {
 				has_idea = TUR_officers_struggle_yildiz_2_org_2
 				has_idea = TUR_officers_struggle_yildiz_2_org
 				has_idea = TUR_officers_struggle_yildiz_2
+				has_idea = TUR_officers_struggle_yildiz
 			}
 		}
 		complete_effect = {
@@ -682,12 +880,11 @@ political_actions = {
 			tag = TUR
 		}
 		icon = generic_military
-		cost = 15
+		cost = 20
 		fire_only_once = no
 		days_remove = 30
 		days_re_enable = 60
 		visible = {
-			has_completed_focus = TUR_purge_the_officers
 			has_completed_focus = TUR_harbiyeli
 			OR = {
 				has_idea = TUR_officers_struggle_harbiyeli_bonus
@@ -712,14 +909,16 @@ political_actions = {
 		}
 	}
 	TUR_army_modernization_decision = {
-		allowed = { tag = TUR }
+		allowed = {
+			tag = TUR
+		}
 		icon = generic_army_support
-		
-		cost = 25
-		
+		available = {
+			has_army_experience > 10
+		}
+		cost = 0
 		fire_only_once = no
-		days_re_enable = 10
-		
+		days_re_enable = 25
 		visible = {
 			has_completed_focus = TUR_uniform_reform
 			OR = {
@@ -738,6 +937,7 @@ political_actions = {
 		}
 		complete_effect = {
 			TUR_modernize_army_effect = yes
+			army_experience = -10
 		}
 		cancel_if_not_visible = no
 		ai_will_do = {
@@ -745,60 +945,7 @@ political_actions = {
 		}
 	}
 }
-economy_decisions = {
-	TUR_ger_investments_in_infrastructure = {
-		allowed = { tag = TUR }
-		visible = {
-			has_completed_focus = TUR_search_for_investments
-		}
-		cost = 10
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 30
-	}
-	TUR_ger_investments_in_civil_industry = {
-		allowed = { tag = TUR }
-		visible = {
-			has_completed_focus = TUR_search_for_investments
-		}
-		cost = 10
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 30
-	}
-	
-	TUR_ger_investments_in_military_industry = {
-		allowed = { tag = TUR }
-		visible = {
-			has_completed_focus = TUR_search_for_investments
-		}
-		cost = 10
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 30
-	}
-	TUR_ger_investments_in_marine_industry = {
-		allowed = { tag = TUR }
-		visible = {
-			has_completed_focus = TUR_search_for_investments
-		}
-		cost = 10
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 30
-	}
-	
-	TUR_pay_off_our_debts = {
-		allowed = { tag = TUR }
-		visible = {
-			has_completed_focus = TUR_paying_back_debts
-		}
-		cost = 10
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 30
-	}
-}
+
 TUR_weapons_import_category = {
 	TUR_research_foreign_equipment_production = {
 		icon = hol_attract_foreign_investors
@@ -820,48 +967,60 @@ TUR_weapons_import_category = {
 		}
 		cost = 10
 		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 30
+		days_remove = 50
+		days_re_enable = 50
 		modifier = {
 			civilian_factory_use = 2
 		}
 		visible = {
 		}
 		remove_effect = {
-            if = {
-				limit = { has_idea = TUR_dependence_on_imported_weapons }
-				remove_ideas = TUR_dependence_on_imported_weapons
-			}			
 			if = {
-				limit = { has_idea = TUR_dependence_on_imported_weapons_2 }
+				limit = {
+					has_idea = TUR_dependence_on_imported_weapons
+				}
+				remove_ideas = TUR_dependence_on_imported_weapons
+			}
+			if = {
+				limit = {
+					has_idea = TUR_dependence_on_imported_weapons_2
+				}
 				swap_ideas = {
 					add_idea = TUR_dependence_on_imported_weapons
 					remove_idea = TUR_dependence_on_imported_weapons_2
 				}
 			}
 			if = {
-				limit = { has_idea = TUR_dependence_on_imported_weapons_3 }
+				limit = {
+					has_idea = TUR_dependence_on_imported_weapons_3
+				}
 				swap_ideas = {
 					add_idea = TUR_dependence_on_imported_weapons_2
 					remove_idea = TUR_dependence_on_imported_weapons_3
 				}
 			}
 			if = {
-				limit = { has_idea = TUR_dependence_on_imported_weapons_4 }
+				limit = {
+					has_idea = TUR_dependence_on_imported_weapons_4
+				}
 				swap_ideas = {
 					add_idea = TUR_dependence_on_imported_weapons_3
 					remove_idea = TUR_dependence_on_imported_weapons_4
 				}
 			}
 			if = {
-				limit = { has_idea = TUR_dependence_on_imported_weapons_5 }
+				limit = {
+					has_idea = TUR_dependence_on_imported_weapons_5
+				}
 				swap_ideas = {
 					add_idea = TUR_dependence_on_imported_weapons_4
 					remove_idea = TUR_dependence_on_imported_weapons_5
 				}
 			}
 			if = {
-				limit = { has_idea = TUR_dependence_on_imported_weapons_6 }
+				limit = {
+					has_idea = TUR_dependence_on_imported_weapons_6
+				}
 				swap_ideas = {
 					add_idea = TUR_dependence_on_imported_weapons_5
 					remove_idea = TUR_dependence_on_imported_weapons_6
@@ -876,13 +1035,17 @@ TUR_weapons_import_category = {
 			}
 			modifier = {
 				factor = 0.1
-				threat < 0.10
+				threat < 0.1
 			}
 			modifier = {
 				factor = 10
 				OR = {
-					NOT = { has_idea = TUR_sick_man }
-					NOT = { has_idea = TUR_ODPA }
+					NOT = {
+						has_idea = TUR_sick_man
+					}
+					NOT = {
+						has_idea = TUR_ODPA
+					}
 				}
 			}
 		}
@@ -890,7 +1053,14 @@ TUR_weapons_import_category = {
 	# early weapon
 	TUR_buy_ger_infantry_weapons = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
 		available = {
 			GER = {
 				has_opinion = {
@@ -898,41 +1068,50 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
-		days_re_enable = 180
+		days_re_enable = 72
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 3
 		}
 		visible = {
-			GER = { exists = yes }
-			NOT = { has_completed_focus = TUR_support_domestic_weapon_industry }
+			GER = {
+				exists = yes
+			}
 		}
 		complete_effect = {
 			GER = {
 				add_offsite_building = {
 					type = industrial_complex
-					level = 1
+					level = 2
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = infantry_equipment_0
-				amount = 5000 
+				amount = 7000
 				producer = GER
 			}
 			GER = {
 				add_offsite_building = {
 					type = industrial_complex
-					level = -1
+					level = -2
 				}
 			}
 		}
@@ -941,10 +1120,10 @@ TUR_weapons_import_category = {
 			modifier = {
 				OR = {
 					num_of_civilian_factories < 5
-					stockpile_ratio = { 
-		  				archetype = infantry_equipment
-		  				ratio > 1
-		  			}
+					stockpile_ratio = {
+						archetype = infantry_equipment
+						ratio > 1
+					}
 				}
 				factor = 0
 			}
@@ -956,7 +1135,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_eng_infantry_weapons = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
 		available = {
 			ENG = {
 				has_opinion = {
@@ -964,20 +1150,28 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
-		days_re_enable = 180
+		days_re_enable = 72
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 2
 		}
 		visible = {
-			ENG = { exists = yes }
-			NOT = { has_completed_focus = TUR_support_domestic_weapon_industry }
+			ENG = {
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = TUR_support_domestic_weapon_industry
+			}
 		}
 		complete_effect = {
 			ENG = {
@@ -986,13 +1180,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
-				type = infantry_equipment_0
-				amount = 5000 
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_1
+				amount = 5550
 				producer = ENG
 			}
 			ENG = {
@@ -1007,10 +1205,10 @@ TUR_weapons_import_category = {
 			modifier = {
 				OR = {
 					num_of_civilian_factories < 5
-					stockpile_ratio = { 
-		  				archetype = infantry_equipment
-		  				ratio > 1
-		  			}
+					stockpile_ratio = {
+						archetype = infantry_equipment
+						ratio > 1
+					}
 				}
 				factor = 0
 			}
@@ -1022,7 +1220,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_fra_infantry_weapons = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
 		available = {
 			FRA = {
 				has_opinion = {
@@ -1030,19 +1235,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
-		days_remove = 60
-		days_re_enable = 180
+		days_remove = 50
+		days_re_enable = 72
 		modifier = {
 			civilian_factory_use = 1
 		}
 		visible = {
-			FRA = { exists = yes }
+			FRA = {
+				exists = yes
+			}
 			has_completed_focus = TUR_import_dependence
 		}
 		complete_effect = {
@@ -1052,13 +1263,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = infantry_equipment_0
-				amount = 5000 
+				amount = 3000
 				producer = FRA
 			}
 			FRA = {
@@ -1073,10 +1288,10 @@ TUR_weapons_import_category = {
 			modifier = {
 				OR = {
 					num_of_civilian_factories < 5
-					stockpile_ratio = { 
-		  				archetype = infantry_equipment
-		  				ratio > 1
-		  			}
+					stockpile_ratio = {
+						archetype = infantry_equipment
+						ratio > 1
+					}
 				}
 				factor = 0
 			}
@@ -1086,10 +1301,17 @@ TUR_weapons_import_category = {
 			}
 		}
 	}
-	# support weapons
+	### support weapons
 	TUR_buy_ger_support_weapons = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
 		available = {
 			GER = {
 				has_opinion = {
@@ -1097,19 +1319,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
-		days_remove = 60
-		days_re_enable = 180
+		days_remove = 30
+		days_re_enable = 60
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 2
 		}
 		visible = {
-			GER = { exists = yes }
+			GER = {
+				exists = yes
+			}
 			has_completed_focus = TUR_import_dependence
 		}
 		complete_effect = {
@@ -1119,13 +1347,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = support_equipment
-				amount = 250 
+				amount = 135
 				producer = GER
 			}
 			GER = {
@@ -1155,7 +1387,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_eng_support_weapons = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
 		available = {
 			ENG = {
 				has_opinion = {
@@ -1163,19 +1402,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
-		days_remove = 60
-		days_re_enable = 180
+		days_remove = 45
+		days_re_enable = 65
 		modifier = {
 			civilian_factory_use = 1
 		}
 		visible = {
-			ENG = { exists = yes }
+			ENG = {
+				exists = yes
+			}
 			has_completed_focus = TUR_import_dependence
 		}
 		complete_effect = {
@@ -1185,13 +1430,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = support_equipment
-				amount = 250 
+				amount = 75
 				producer = ENG
 			}
 			ENG = {
@@ -1219,31 +1468,131 @@ TUR_weapons_import_category = {
 			}
 		}
 	}
-	# Heavy artillery
-	TUR_buy_fra_howitzer = {
-		icon = GFX_decision_ger_military_buildup
-		allowed = { tag = TUR } 
+	TUR_buy_ger_fighter_weapons = {
+		icon = generic_industry
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
 		available = {
-			FRA = {
+			GER = {
 				has_opinion = {
 					target = ROOT
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
-		days_remove = 60
-		days_re_enable = 180
+		days_remove = 30
+		days_re_enable = 60
 		modifier = {
 			civilian_factory_use = 1
 		}
 		visible = {
-			FRA = { exists = yes }
-			has_completed_focus = TUR_heavy_artillery
+			GER = {
+				exists = yes
+			}
+			has_completed_focus = TUR_import_aircrafts
+		}
+		complete_effect = {
+			GER = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
+		}
+		remove_effect = {
+			TUR_import_dependence_level_up = yes
+			add_equipment_to_stockpile = {
+				type = fighter_equipment
+				amount = 20
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = airship_bomber_equipment
+				amount = 10
+				producer = GER
+			}
+			GER = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				OR = {
+					num_of_civilian_factories < 5
+					has_equipment = {
+						fighter_equipment > 20
+					}
+					has_idea = TUR_dependence_on_imported_weapons_4
+				}
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 10
+			}
+		}
+	}
+	TUR_buy_fra_fighter_weapons = {
+		icon = generic_industry
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
+		available = {
+			GER = {
+				has_opinion = {
+					target = ROOT
+					value > 0
+				}
+			}
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
+		}
+		cost = 10
+		fire_only_once = no
+		days_remove = 30
+		days_re_enable = 60
+		modifier = {
+			civilian_factory_use = 1
+		}
+		visible = {
+			FRA = {
+				exists = yes
+			}
+			has_completed_focus = TUR_import_aircrafts
 		}
 		complete_effect = {
 			FRA = {
@@ -1252,13 +1601,110 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
+				type = fighter_equipment
+				amount = 10
+				producer = FRA
+			}
+			add_equipment_to_stockpile = {
+				type = scout_plane_equipment
+				amount = 7
+				producer = FRA
+			}
+			add_equipment_to_stockpile = {
+				type = airship_bomber_equipment
+				amount = 4
+				producer = FRA
+			}
+			FRA = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0.1
+			modifier = {
+				OR = {
+					num_of_civilian_factories < 5
+					has_equipment = {
+						fighter_equipment > 20
+					}
+					has_idea = TUR_dependence_on_imported_weapons_4
+				}
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 10
+			}
+		}
+	}
+	### Heavy artillery
+	TUR_buy_fra_howitzer = {
+		icon = GFX_decision_ger_military_buildup
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
+		available = {
+			FRA = {
+				has_opinion = {
+					target = ROOT
+					value > 0
+				}
+			}
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
+		}
+		cost = 10
+		fire_only_once = no
+		days_remove = 60
+		days_re_enable = 180
+		modifier = {
+			civilian_factory_use = 2
+		}
+		visible = {
+			FRA = {
+				exists = yes
+			}
+		}
+		complete_effect = {
+			FRA = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
+		}
+		remove_effect = {
+			TUR_import_dependence_level_up = yes
+			add_equipment_to_stockpile = {
 				type = howitzer_equipment
-				amount = 50 
+				amount = 47
 				producer = FRA
 			}
 			FRA = {
@@ -1274,7 +1720,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_ger_howitzer = {
 		icon = GFX_decision_ger_military_buildup
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
 		available = {
 			GER = {
 				has_opinion = {
@@ -1282,20 +1735,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
 		days_re_enable = 180
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 2
 		}
 		visible = {
-			GER = { exists = yes }
-			has_completed_focus = TUR_heavy_artillery
+			GER = {
+				exists = yes
+			}
 		}
 		complete_effect = {
 			GER = {
@@ -1304,13 +1762,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = howitzer_equipment
-				amount = 50 
+				amount = 76
 				producer = GER
 			}
 			GER = {
@@ -1324,10 +1786,17 @@ TUR_weapons_import_category = {
 			factor = 0
 		}
 	}
-	# Artillery
+	### Artillery
 	TUR_buy_eng_field_artillery = {
 		icon = GFX_decision_ger_military_buildup
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
 		available = {
 			ENG = {
 				has_opinion = {
@@ -1335,20 +1804,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
-		days_re_enable = 180
+		days_re_enable = 124
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 2
 		}
 		visible = {
-			ENG = { exists = yes }
-			has_completed_focus = TUR_heavy_artillery
+			ENG = {
+				exists = yes
+			}
 		}
 		complete_effect = {
 			ENG = {
@@ -1357,13 +1831,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = artillery_equipment
-				amount = 250 
+				amount = 128
 				producer = ENG
 			}
 			ENG = {
@@ -1393,7 +1871,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_auh_field_artillery = {
 		icon = GFX_decision_ger_military_buildup
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = AUH
+			}
+		}
 		available = {
 			AUH = {
 				has_opinion = {
@@ -1401,19 +1886,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
-		days_remove = 60
+		days_remove = 55
 		days_re_enable = 180
 		modifier = {
 			civilian_factory_use = 1
 		}
 		visible = {
-			AUH = { exists = yes }
+			AUH = {
+				exists = yes
+			}
 			has_completed_focus = TUR_heavy_artillery
 		}
 		complete_effect = {
@@ -1423,13 +1914,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = artillery_equipment
-				amount = 250 
+				amount = 86
 				producer = AUH
 			}
 			AUH = {
@@ -1459,7 +1954,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_ger_field_artillery = {
 		icon = GFX_decision_ger_military_buildup
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
 		available = {
 			GER = {
 				has_opinion = {
@@ -1467,41 +1969,51 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
 		days_re_enable = 180
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 4
 		}
 		visible = {
-			GER = { exists = yes }
+			GER = {
+				exists = yes
+			}
 			has_completed_focus = TUR_heavy_artillery
 		}
 		complete_effect = {
 			GER = {
 				add_offsite_building = {
 					type = industrial_complex
-					level = 1
+					level = 2
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = artillery_equipment
-				amount = 250 
+				amount = 285
 				producer = GER
 			}
 			GER = {
 				add_offsite_building = {
 					type = industrial_complex
-					level = -1
+					level = -2
 				}
 			}
 		}
@@ -1523,49 +2035,70 @@ TUR_weapons_import_category = {
 			}
 		}
 	}
-	# transport
+	### transport
 	TUR_buy_usa_transport = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				OR = {
+					tag = USA
+					tag = CSA
+					tag = USB
+				}			
+			}
+		}
 		available = {
-			USA = {
+			FROM = {
 				has_opinion = {
 					target = ROOT
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
-		days_re_enable = 180
+		days_re_enable = 95
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 2
 		}
 		visible = {
-			USA = { exists = yes }
+			FROM = {
+				exists = yes
+			}
 			has_completed_focus = TUR_import_dependence
 		}
 		complete_effect = {
-			USA = {
+			FROM = {
 				add_offsite_building = {
 					type = industrial_complex
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = motorized_equipment
 				amount = 150
-				producer = USA
+				producer = FROM
 			}
-			USA = {
+			FROM = {
 				add_offsite_building = {
 					type = industrial_complex
 					level = -1
@@ -1592,7 +2125,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_fra_transport = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
 		available = {
 			FRA = {
 				has_opinion = {
@@ -1600,19 +2140,25 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
-		days_remove = 60
+		days_remove = 45
 		days_re_enable = 180
 		modifier = {
 			civilian_factory_use = 1
 		}
 		visible = {
-			FRA = { exists = yes }
+			FRA = {
+				exists = yes
+			}
 			has_completed_focus = TUR_import_dependence
 		}
 		complete_effect = {
@@ -1622,13 +2168,17 @@ TUR_weapons_import_category = {
 					level = 1
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = motorized_equipment
-				amount = 150
+				amount = 72
 				producer = FRA
 			}
 			FRA = {
@@ -1658,7 +2208,14 @@ TUR_weapons_import_category = {
 	}
 	TUR_buy_ger_transport = {
 		icon = generic_industry
-		allowed = { tag = TUR } 
+		allowed = {
+			tag = TUR
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
 		available = {
 			GER = {
 				has_opinion = {
@@ -1666,41 +2223,51 @@ TUR_weapons_import_category = {
 					value > 0
 				}
 			}
-			NOT = { has_idea = TUR_dependence_on_imported_weapons_6 }
-			NOT = { has_country_flag = has_active_purchase_contract }
+			NOT = {
+				has_idea = TUR_dependence_on_imported_weapons_6
+				has_war_with = FROM
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+			}
 		}
-		
 		cost = 10
 		fire_only_once = no
 		days_remove = 60
 		days_re_enable = 180
 		modifier = {
-			civilian_factory_use = 1
+			civilian_factory_use = 3
 		}
 		visible = {
-			GER = { exists = yes }
+			GER = {
+				exists = yes
+			}
 			has_completed_focus = TUR_import_dependence
 		}
 		complete_effect = {
 			GER = {
 				add_offsite_building = {
 					type = industrial_complex
-					level = 1
+					level = 2
 				}
 			}
-			set_country_flag = { flag = has_active_purchase_contract days = 60 value = 1 }
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
 		}
 		remove_effect = {
 			TUR_import_dependence_level_up = yes
-			add_equipment_to_stockpile = { 
+			add_equipment_to_stockpile = {
 				type = motorized_equipment
-				amount = 150
+				amount = 265
 				producer = GER
 			}
 			GER = {
 				add_offsite_building = {
 					type = industrial_complex
-					level = -1
+					level = -2
 				}
 			}
 		}
@@ -1722,10 +2289,9 @@ TUR_weapons_import_category = {
 			}
 		}
 	}
-}
-TUR_investments_category = {
-	TUR_attract_foreign_investors_british = {
-		icon = hol_attract_foreign_investors
+	### SHIPS
+	TUR_purchase_majestic_class = {
+		icon = generic_naval
 		allowed = {
 			tag = TUR
 		}
@@ -1735,55 +2301,82 @@ TUR_investments_category = {
 			}
 		}
 		available = {
-			has_war = no
-			has_completed_focus = TUR_britishoilagreements
-			ENG = { has_war = no }
-			ENG = { has_opinion = { target = ROOT value > 49 } }
-		}
-		cost = 50
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 90
-		modifier = {
-			political_power_gain = -0.05
-			production_speed_industrial_complex_factor = 0.25
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_britishoilagreements
-		}
-	}
-	TUR_attract_foreign_investors_german = {
-		icon = hol_attract_foreign_investors
-		allowed = {
-			tag = TUR
+			ENG = {
+				has_opinion = {
+					target = ROOT
+					value > 0
+				}
+			}
+			any_owned_state = {
+				is_coastal = yes
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+				has_war_with = FROM
+			}
 		}
 		target_trigger = {
 			FROM = {
-				tag = GER
+				tag = ENG
 			}
 		}
-		available = {
-			has_war = no
-			has_completed_focus = TUR_britishoilagreements
-			GER = { has_war = no }
-			GER = { has_opinion = { target = ROOT value > 49 } }
-		}
-		cost = 50
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 90
+		cost = 20
+		fire_only_once = yes
+		days_remove = 60
 		modifier = {
-			political_power_gain = -0.05
-			production_speed_arms_factory_factor = 0.25
+			civilian_factory_use = 1
 		}
 		visible = {
-			tag = TUR
-			has_completed_focus = TUR_britishoilagreements
+			ENG = {
+				exists = yes
+			}
+			has_completed_focus = TUR_order_battleships
+		}
+		complete_effect = {
+			ENG = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
+		}
+		remove_effect = {
+			create_ship = {
+				type = ship_hull_pre_dreadnought
+				equipment_variant = "Majestic Class"
+				creator = ENG
+				name = "TCG Reşadiye"
+			}
+			ENG = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = -1
+				}
+			}
+			set_country_flag = TUR_tcg_resadiye
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				OR = {
+					num_of_civilian_factories < 5
+					date < 1910.11.1
+				}
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 10
+			}
 		}
 	}
-	TUR_attract_foreign_trade_british = {
-		icon = hol_attract_foreign_investors
+	TUR_purchase_sultan_mehmed_ship = {
+		icon = generic_naval
 		allowed = {
 			tag = TUR
 		}
@@ -1793,811 +2386,868 @@ TUR_investments_category = {
 			}
 		}
 		available = {
-			has_war = no
-			has_completed_focus = TUR_britishoilagreements
-			ENG = { has_war = no }
-			ENG = { has_opinion = { target = ROOT value > 49 } }
+			ENG = {
+				has_opinion = {
+					target = ROOT
+					value > 0
+				}
+			}
+			any_owned_state = {
+				is_coastal = yes
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+				has_war_with = FROM
+			}
 		}
-		cost = 50
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 90
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
+		cost = 20
+		fire_only_once = yes
+		days_remove = 60
 		modifier = {
-			min_export = 0.05
-			production_lack_of_resource_penalty_factor = -0.10
+			civilian_factory_use = 1
 		}
 		visible = {
-			tag = TUR
-			has_completed_focus = TUR_britishoilagreements
+			ENG = {
+				exists = yes
+			}
+			has_completed_focus = TUR_order_battleships
+			has_country_flag = TUR_tcg_resadiye
+		}
+		complete_effect = {
+			ENG = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
+		}
+		remove_effect = {
+			create_ship = {
+				type = ship_hull_pre_dreadnought
+				equipment_variant = "Majestic Class"
+				creator = ENG
+				name = "TCG Fatih Sultan Mehmed"
+			}
+			ENG = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				OR = {
+					num_of_civilian_factories < 5
+					date < 1914.3.1
+				}
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 10
+			}
 		}
 	}
-	TUR_attract_foreign_trade_german = {
-		icon = hol_attract_foreign_investors
+	TUR_purchase_lauria_class = {
+		icon = generic_naval
 		allowed = {
 			tag = TUR
 		}
 		target_trigger = {
 			FROM = {
-				tag = GER
+				tag = ITA
 			}
 		}
 		available = {
-			has_war = no
-			has_completed_focus = TUR_britishoilagreements
-			GER = { has_war = no }
-			GER = { has_opinion = { target = ROOT value > 49 } }
+			ITA = {
+				has_opinion = {
+					target = ROOT
+					value > 0
+				}
+			}
+			any_owned_state = {
+				is_coastal = yes
+			}
+			NOT = {
+				has_country_flag = has_active_purchase_contract
+				has_war_with = FROM
+			}
 		}
-		cost = 50
-		fire_only_once = no
-		days_remove = 90
-		days_re_enable = 90 
+		target_trigger = {
+			FROM = {
+				tag = ITA
+			}
+		}
+		cost = 20
+		fire_only_once = yes
+		days_remove = 60
 		modifier = {
-			min_export = 0.05
-			production_factory_efficiency_gain_factor = 0.1
+			civilian_factory_use = 1
 		}
 		visible = {
-			tag = TUR
-			has_completed_focus = TUR_britishoilagreements
+			ITA = {
+				exists = yes
+			}
+			has_completed_focus = TUR_order_battleships
+			has_country_flag = TUR_tcg_resadiye
+		}
+		complete_effect = {
+			ITA = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			set_country_flag = {
+				flag = has_active_purchase_contract
+				days = 60
+				value = 1
+			}
+		}
+		remove_effect = {
+			create_ship = {
+				type = ship_hull_pre_dreadnought
+				equipment_variant = "Ruggiero di Lauria Class"
+				creator = ITA
+				name = "TCG Kuvvet-i Milliye"
+			}
+			ITA = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				OR = {
+					num_of_civilian_factories < 5
+					date < 1910.8.1
+				}
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 10
+			}
 		}
 	}
 }
-TUR_panturkism_decision = {
-	TUR_panturkism_integrate_kurdistan = {
-		icon = generic_military
+
+#
+# ECONOMY
+#
+economy_decisions = {
+	TUR_berlin_baghdad_railway_mission = {
 		allowed = {
-			tag = TUR
+			original_tag = TUR
 		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
+		icon = generic_construction
 		available = {
-			has_full_control_of_state = 419
-			has_full_control_of_state = 421
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 419
-			add_state_core = 421
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_panturkism_integrate_north_persia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 420
-			has_full_control_of_state = 226
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 420
-			add_state_core = 226
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_panturkism_integrate_south_persia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 413
-			has_full_control_of_state = 412
-			has_full_control_of_state = 410
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 413
-			add_state_core = 412
-			add_state_core = 410
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_panturkism_integrate_central_persia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 416
-			has_full_control_of_state = 417
-			has_full_control_of_state = 411
-			has_full_control_of_state = 414
-			has_full_control_of_state = 418
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 413
-			add_state_core = 412
-			add_state_core = 410
-			add_state_core = 416
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_panturkism_integrate_afghanistan = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 415
-			has_full_control_of_state = 267
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 415
-			add_state_core = 267
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_askhabad = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 584
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 584
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_tashkent = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 405
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 405
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_dyushambe = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 742
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 742
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_north_turkestan = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 587
-			has_full_control_of_state = 585
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 587
-			add_state_core = 585
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_baku = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 229
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 229
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_south_ural = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 402
-			has_full_control_of_state = 406
-			has_full_control_of_state = 407
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 402
-			add_state_core = 406
-			add_state_core = 407
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_pamir = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 586
-			has_full_control_of_state = 732
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 586
-			add_state_core = 732
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_kazakhs = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 404
-			has_full_control_of_state = 589
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 404
-			add_state_core = 589
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_qirim = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 137
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_panturkism
-		}
-		remove_effect = {
-			add_state_core = 137
-			set_province_name = { id = 3686 name = BAHCESARAY_PROV }
+			#BREAK MISSION
+			has_war_with = GER
+			hidden_trigger = {
+				OR = {
+					AND = {
+						NOT = {
+							has_global_flag = berlin_baghdad_dispute_ended
+						}
+						all_controlled_state = {
+							OR = {
+								state = 341
+								state = 347
+								state = 49
+								state = 348
+								state = 344
+								state = 350
+								state = 352
+								state = 676
+								state = 291
+							}
+							free_building_slots = {
+								building = infrastructure
+								size < 5
+								include_locked = yes
+							}
+						}
+					}
+					AND = {
+						has_global_flag = berlin_baghdad_dispute_ended
+						all_controlled_state = {
+							OR = {
+								state = 341
+								state = 347
+								state = 49
+								state = 348
+								state = 344
+								state = 350
+								state = 352
+							}
+							free_building_slots = {
+								building = infrastructure
+								size < 5
+								include_locked = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		days_mission_timeout = 35
+		timeout_effect = {
+			every_state = {
+				limit = {
+					has_state_flag = TUR_berlin_baghdad_railway_state
+				}
+				clr_state_flag = TUR_berlin_baghdad_railway_state
+			}
+			random_controlled_state = {
+				limit = {
+					NOT = {
+						has_state_flag = TUR_berlin_baghdad_railway_state
+					}
+					NOT = {
+						has_state_flag = TUR_berlin_baghdad_railway_state_blocked
+					}
+					OR = {
+						state = 341
+						state = 347
+						state = 49
+						state = 348
+						state = 344
+						state = 350
+						state = 352
+						state = 676
+						state = 291
+					}
+					free_building_slots = {
+						building = infrastructure
+						size > 5
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = TUR_berlin_baghdad_railway_state
+			}
 			hidden_effect = {
-				137 = { set_state_name = QIRIM_STATE }
+				activate_mission = TUR_berlin_baghdad_railway_mission
 			}
 		}
-		complete_effect = {
+		fire_only_once = no
+		is_good = yes
+	}
+	TUR_ger_investments_in_civil_industry = {
+		allowed = {
+			always = no
 		}
-		ai_will_do = { factor = 100 }
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = GER
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 180
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = GER
+			}
+		}
+		modifier = {
+			production_speed_industrial_complex_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war = no
+				date < 1913.5.1
+			}
+			modifier = {
+				add = 10
+				num_of_civilian_factories < 35
+			}
+		}
+	}
+	TUR_ger_investments_in_military_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = GER
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 160
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = GER
+			}
+			has_idea = TUR_sick_man
+		}
+		modifier = {
+			production_speed_arms_factory_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war = yes
+			}
+			modifier = {
+				add = 10
+				num_of_military_factories < 20
+			}
+		}
+	}
+	TUR_ger_investments_in_marine_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = GER
+		}
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 180
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = GER
+			}
+		}
+		modifier = {
+			production_speed_dockyard_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war_with = ENG
+			}
+			modifier = {
+				add = 10
+				num_of_naval_factories < 20
+				OR = {
+					has_completed_focus = TUR_order_battleships
+					has_completed_focus = TUR_study_dreadnought_designs
+				}
+			}
+		}
+	}
+	###
+	TUR_eng_investments_in_civil_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = ENG
+		}
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 180
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = ENG
+			}
+		}
+		modifier = {
+			production_speed_industrial_complex_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war = no
+				date < 1913.5.1
+			}
+			modifier = {
+				add = 10
+				num_of_civilian_factories < 35
+			}
+		}
+	}
+	TUR_eng_investments_in_military_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = ENG
+		}
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 160
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = ENG
+			}
+		}
+		modifier = {
+			production_speed_arms_factory_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war = yes
+			}
+			modifier = {
+				add = 10
+				num_of_military_factories < 20
+			}
+		}
+	}
+	TUR_eng_investments_in_marine_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = ENG
+		}
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 180
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = ENG
+			}
+		}
+		modifier = {
+			production_speed_dockyard_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war_with = RUS
+			}
+			modifier = {
+				add = 10
+				num_of_naval_factories < 20
+				OR = {
+					has_completed_focus = TUR_order_battleships
+					has_completed_focus = TUR_study_dreadnought_designs
+				}
+			}
+		}
+	}
+	###
+	TUR_fra_investments_in_civil_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = FRA
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 180
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = FRA
+			}
+		}
+		modifier = {
+			production_speed_industrial_complex_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war = no
+				date < 1913.5.1
+			}
+			modifier = {
+				add = 10
+				num_of_civilian_factories < 35
+			}
+		}
+	}
+	TUR_fra_investments_in_military_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = FRA
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 160
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = FRA
+			}
+		}
+		modifier = {
+			production_speed_arms_factory_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war = yes
+			}
+			modifier = {
+				add = 10
+				num_of_military_factories < 20
+			}
+		}
+	}
+	TUR_fra_investments_in_marine_industry = {
+		allowed = {
+			always = no
+		}
+		icon = generic_factory
+		visible = {
+			has_completed_focus = TUR_search_for_investments
+			country_exists = FRA
+		}
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
+		cost = 25
+		fire_only_once = no
+		days_remove = 180
+		days_re_enable = 30
+		available = {
+			NOT = {
+				has_war_with = FRA
+			}
+		}
+		modifier = {
+			production_speed_dockyard_factor = 0.02
+		}
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = TUR
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				has_war_with = GER
+			}
+			modifier = {
+				add = 10
+				num_of_naval_factories < 20
+				OR = {
+					has_completed_focus = TUR_order_battleships
+					has_completed_focus = TUR_study_dreadnought_designs
+				}
+			}
+		}
 	}
 }
-TUR_unite_islam = {
-	TUR_integrate_egypt = {
-		icon = infiltrate_state
+
+propaganda_efforts = {
+	TUR_rename_kostantiniyye = {
 		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
+			NOT = {
+				original_tag = TUR
+			}
 		}
 		available = {
-			has_full_control_of_state = 453
-			has_full_control_of_state = 446 #Cairo
-			has_full_control_of_state = 447 #Alexandrio
-			has_full_control_of_state = 452
-			has_full_control_of_state = 457
-			has_full_control_of_state = 456
-			has_full_control_of_state = 552
+			owns_state = 347
+			has_full_control_of_state = 347
+			hidden_trigger = {
+				NOT = {
+					has_global_flag = kostantiniyye_is_constantinople
+				}
+			}
 		}
+		ai_will_do = {
+			factor = 100
+		}
+		cost = 10
 		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
+			owns_state = 347
+			has_full_control_of_state = 347
+			hidden_trigger = {
+				NOT = {
+					has_global_flag = kostantiniyye_is_constantinople
+				}
+			}
 		}
-		remove_effect = {
-			add_state_core = 453
-			add_state_core = 446
-			add_state_core = 447
-			add_state_core = 452
-			add_state_core = 457
-			add_state_core = 456
-			add_state_core = 552
-		}
+		fire_only_once = no
 		complete_effect = {
+			set_province_name = {
+				id = 9833
+				name = CONSTANTINOPLE_PROV
+			}
+			347 = {
+				set_state_name = CONSTANTINOPLE_STATE
+			}
+			hidden_effect = {
+				set_global_flag = kostantiniyye_is_constantinople
+			}
 		}
-		ai_will_do = { factor = 100 }
 	}
-	TUR_integrate_libya = {
-		icon = infiltrate_state
+	TUR_rename_constantinople = {
 		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
+			original_tag = TUR
 		}
 		available = {
-			has_full_control_of_state = 451
-			has_full_control_of_state = 450
-			has_full_control_of_state = 449
-			has_full_control_of_state = 448
-			has_full_control_of_state = 663
-			has_full_control_of_state = 662
-			has_full_control_of_state = 661
-			has_full_control_of_state = 273
-			has_full_control_of_state = 754
+			owns_state = 347
+			has_full_control_of_state = 347
+			hidden_trigger = {
+				has_global_flag = kostantiniyye_is_constantinople
+			}
 		}
+		ai_will_do = {
+			factor = 100
+		}
+		cost = 10
 		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
+			owns_state = 347
+			has_full_control_of_state = 347
+			hidden_trigger = {
+				has_global_flag = kostantiniyye_is_constantinople
+			}
 		}
-		remove_effect = {
-			add_state_core = 453
-			add_state_core = 446
-			add_state_core = 447
-			add_state_core = 452
-			add_state_core = 457
-			add_state_core = 456
-			add_state_core = 552
-		}
+		fire_only_once = no
 		complete_effect = {
+			reset_province_name = 9833
+			347 = {
+				reset_state_name = yes
+			}
+			hidden_effect = {
+				clr_global_flag = kostantiniyye_is_constantinople
+			}
 		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_hejaz = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 679
-			has_full_control_of_state = 747
-			has_full_control_of_state = 293
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 679
-			add_state_core = 747
-			add_state_core = 293
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_arabia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 791
-			has_full_control_of_state = 656
-			has_full_control_of_state = 292
-			has_full_control_of_state = 804
-			has_full_control_of_state = 765
-			has_full_control_of_state = 678
-			has_full_control_of_state = 658
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 791
-			add_state_core = 656
-			add_state_core = 292
-			add_state_core = 804
-			add_state_core = 765
-			add_state_core = 678
-			add_state_core = 658
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_oman = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 659
-			has_full_control_of_state = 294
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 659
-			add_state_core = 294
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_tunis = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 458
-			has_full_control_of_state = 665
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 458
-			add_state_core = 665
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_algiers = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 460
-			has_full_control_of_state = 659
-			has_full_control_of_state = 513
-			has_full_control_of_state = 514
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 459
-			add_state_core = 659
-			add_state_core = 513
-			add_state_core = 514
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_kurdistan = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 419
-			has_full_control_of_state = 421
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 419
-			add_state_core = 421
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_north_persia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 420
-			has_full_control_of_state = 226
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 420
-			add_state_core = 226
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_south_persia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 413
-			has_full_control_of_state = 412
-			has_full_control_of_state = 410
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 413
-			add_state_core = 412
-			add_state_core = 410
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_central_persia = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 416
-			has_full_control_of_state = 417
-			has_full_control_of_state = 411
-			has_full_control_of_state = 414
-			has_full_control_of_state = 418
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 413
-			add_state_core = 412
-			add_state_core = 410
-			add_state_core = 416
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_afghanistan = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 415
-			has_full_control_of_state = 267
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 415
-			add_state_core = 267
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
-	}
-	TUR_integrate_pakistan = {
-		icon = infiltrate_state
-		allowed = {
-			tag = TUR
-		}
-		cost = 75
-		fire_only_once = yes
-		days_remove = 90
-		modifier = {
-		}
-		available = {
-			has_full_control_of_state = 444
-			has_full_control_of_state = 445
-			has_full_control_of_state = 442
-			has_full_control_of_state = 443
-			has_full_control_of_state = 440
-		}
-		visible = {
-			tag = TUR
-			has_completed_focus = TUR_uniteislamundertheonebanner
-		}
-		remove_effect = {
-			add_state_core = 444
-			add_state_core = 445
-			add_state_core = 442
-			add_state_core = 443
-			add_state_core = 440
-		}
-		complete_effect = {
-		}
-		ai_will_do = { factor = 100 }
 	}
 }

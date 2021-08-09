@@ -5,8 +5,6 @@ division_template = {
 	name = "Citizen Militia Forces Regiment"
 	regiments = {
 		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-
 	}
 }
 

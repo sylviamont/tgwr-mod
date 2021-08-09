@@ -65,7 +65,7 @@ has_ROOT_at_least_1_div_in_current_state_scope = {
 check_has_focus_tree_to_switch_to_fascism = {
 	NOT = { tag = JAP }
 	NOT = { tag = GER }
-	NOT = { tag = ITA }
+	NOT = { original_tag = ITA }
 	NOT = { tag = ENG }
 	NOT = { tag = BRA }
 	NOT = { tag = USA }
@@ -74,6 +74,7 @@ check_has_focus_tree_to_switch_to_fascism = {
 	NOT = { tag = TUR }
 	NOT = { tag = KOR }
 	NOT = { tag = CHI }
+	NOT = { tag = POL }
 }
 
 check_has_focus_tree_to_switch_to_democratic = {
@@ -82,7 +83,7 @@ check_has_focus_tree_to_switch_to_democratic = {
 	NOT = { tag = ENG }
 	NOT = { tag = CAN }
 	NOT = { tag = GER }
-	NOT = { tag = ITA }
+	NOT = { original_tag = ITA }
 	NOT = { tag = BUL }
 	NOT = { tag = SER }
 	NOT = { tag = TUR }
@@ -92,6 +93,8 @@ check_has_focus_tree_to_switch_to_democratic = {
 	NOT = { tag = SOV }
 	NOT = { tag = KOR }
 	NOT = { tag = CHI }
+	NOT = { tag = POL }
+	NOT = { tag = QIN }
 }
 
 check_has_focus_tree_to_switch_to_communism = {
@@ -106,7 +109,8 @@ check_has_focus_tree_to_switch_to_communism = {
 	NOT = { tag = RUS }
 	NOT = { tag = BRA }
 	NOT = { tag = KOR }
-	NOT = { tag = ITA }
+	NOT = { original_tag = ITA }
+	NOT = { tag = POL }
 }
 
 #State scope
@@ -289,82 +293,12 @@ enemy_has_equal_or_better_radar_tech_trigger = {
 		tooltip = enemy_has_equal_or_better_radar_tech_trigger_tt
 		if = {
 			limit = {
-				ROOT = { 
+				ROOT = {
 					has_tech = radio_detection 
-					NOT = {
-						has_tech = decimetric_radar
-					}
 				} 
 			}
-			FROM = { 
-				OR = {
-					has_tech = radio_detection 
-					has_tech = decimetric_radar
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				ROOT = { 
-					has_tech = decimetric_radar 
-					NOT = {
-						has_tech = improved_decimetric_radar
-					}
-				} 
-			}
-			FROM = { 
-				OR = {
-					has_tech = decimetric_radar 
-					has_tech = improved_decimetric_radar
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				ROOT = { 
-					has_tech = improved_decimetric_radar 
-					NOT = {
-						has_tech = centimetric_radar
-					}
-				} 
-			}
-			FROM = { 
-				OR = {
-					has_tech = improved_decimetric_radar 
-					has_tech = centimetric_radar
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				ROOT = { 
-					has_tech = centimetric_radar 
-					NOT = {
-						has_tech = improved_centimetric_radar
-					}
-				} 
-			}
-			FROM = { 
-				OR = {
-					has_tech = centimetric_radar 
-					has_tech = improved_centimetric_radar
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				ROOT = { 
-					has_tech = improved_centimetric_radar 
-					NOT = {
-						has_tech = advanced_centimetric_radar
-					}
-				} 
-			}
-			FROM = { 
-				OR = {
-					has_tech = improved_centimetric_radar 
-					has_tech = advanced_centimetric_radar
-				}
+			FROM = {
+				has_tech = radio_detection 
 			}
 		}
 		#no more steps needed because end of research tree is reached

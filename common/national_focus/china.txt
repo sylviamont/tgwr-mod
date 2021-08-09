@@ -1,14 +1,14 @@
 focus_tree = {
 	id = china_focus
 	country = {
-		factor = 0
+		base = 0
 		modifier = {
 			add = 10
-			tag = QIN
+			original_tag = QIN 
 		}
 		modifier = {
 			add = 10
-			tag = CHI
+			original_tag = CHI
 		}
 	}
 	default = no
@@ -20,18 +20,17 @@ focus_tree = {
 	#available_theorist
 	#available_designer
 	#available_industrial_concern
-	continuous_focus_position = { x = 20 y = 1000 }
-	
+	continuous_focus_position = {
+		x = 20
+		y = 1000
+	}
 	focus = {
 		id = CHI_nation_recovery
-		icon = GFX_goal_generic_construction2
+		icon = GFX_focus_dead_economy
 		cost = 10
 		x = 9
 		y = 0
 		cancel_if_invalid = no
-		
-		
-		
 		available = {
 		}
 		bypass = {
@@ -39,12 +38,14 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_nation_recovery
-				bonus = 1.0
+				bonus = 1
 				uses = 1
 				category = industry
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 10
 		}
@@ -56,9 +57,6 @@ focus_tree = {
 		x = 26
 		y = 0
 		cancel_if_invalid = no
-		
-		
-		
 		available = {
 		}
 		bypass = {
@@ -66,7 +64,9 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 100
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }	
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 10
 		}
@@ -81,35 +81,40 @@ focus_tree = {
 		x = 4
 		y = 1
 		cancel_if_invalid = no
-		
-		
-		
 		available = {
 		}
 		bypass = {
-			NOT = { has_idea = QIN_idea_purchase_restriction }
+			NOT = {
+				has_idea = QIN_idea_purchase_restriction
+			}
 		}
 		completion_reward = {
 			remove_ideas = QIN_idea_purchase_restriction
 			if = {
-				limit = { tag = QIN }
+				limit = {
+					tag = QIN
+				}
 				custom_effect_tooltip = available_political_advisor
 				show_ideas_tooltip = QIN_su_xidi
 			}
 			if = {
-				limit = { tag = CHI }
+				limit = {
+					tag = CHI
+				}
 				custom_effect_tooltip = available_political_advisor
 				show_ideas_tooltip = CHI_zhou_xuexi
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
 		id = CHI_pave_way_for_industrialization
-		icon = GFX_goal_generic_construction
+		icon = GFX_focus_seven_year_plan
 		cost = 10
 		prerequisite = {
 			focus = CHI_restore_military_production
@@ -117,18 +122,19 @@ focus_tree = {
 		x = 2
 		y = 2
 		cancel_if_invalid = no
-		
-		
-		
 		available = {
 		}
 		bypass = {
-			NOT = { has_idea = isolation }
+			NOT = {
+				has_idea = isolation
+			}
 		}
 		completion_reward = {
 			add_ideas = civilian_economy
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }	
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -142,15 +148,22 @@ focus_tree = {
 		}
 		x = 0
 		y = 3
-		
-		
-		
-		
 		available = {
-			610 = { is_fully_controlled_by = ROOT }
-			609 = { is_fully_controlled_by = ROOT }
-			715 = { is_fully_controlled_by = ROOT }
-			716 = { is_fully_controlled_by = ROOT }
+			610 = {
+				is_fully_controlled_by = ROOT
+			}
+			609 = {
+				is_fully_controlled_by = ROOT
+			}
+			617 = {
+				is_fully_controlled_by = ROOT
+			}
+			715 = {
+				is_fully_controlled_by = ROOT
+			}
+			716 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -164,6 +177,14 @@ focus_tree = {
 				}
 			}
 			609 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			617 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = infrastructure
@@ -186,67 +207,86 @@ focus_tree = {
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_6 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_6
+				}
 				remove_ideas = QIN_idea_payments_of_indemnities_6
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_5 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_5
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_5
 					add_idea = QIN_idea_payments_of_indemnities_6
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_4 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_4
 					add_idea = QIN_idea_payments_of_indemnities_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_3 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_3
 					add_idea = QIN_idea_payments_of_indemnities_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_2 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_2
 					add_idea = QIN_idea_payments_of_indemnities_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities
 					add_idea = QIN_idea_payments_of_indemnities_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
 		id = CHI_central_provinces
-		icon = GFX_focus_generic_industry_1
+		icon = GFX_focus_train_railroads
 		cost = 10
 		prerequisite = {
 			focus = CHI_pave_way_for_industrialization
 		}
 		x = 2
 		y = 3
-		
-		
-		
 		available = {
-			605 = { is_fully_controlled_by = ROOT }
-			620 = { is_fully_controlled_by = ROOT }
-			606 = { is_fully_controlled_by = ROOT }
-			598 = { is_fully_controlled_by = ROOT }
+			605 = {
+				is_fully_controlled_by = ROOT
+			}
+			620 = {
+				is_fully_controlled_by = ROOT
+			}
+			606 = {
+				is_fully_controlled_by = ROOT
+			}
+			598 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -280,65 +320,80 @@ focus_tree = {
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_6 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_6
+				}
 				remove_ideas = QIN_idea_payments_of_indemnities_6
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_5 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_5
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_5
 					add_idea = QIN_idea_payments_of_indemnities_6
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_4 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_4
 					add_idea = QIN_idea_payments_of_indemnities_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_3 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_3
 					add_idea = QIN_idea_payments_of_indemnities_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_2 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_2
 					add_idea = QIN_idea_payments_of_indemnities_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities
 					add_idea = QIN_idea_payments_of_indemnities_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
 		id = CHI_sichuan_factories
-		icon = GFX_goal_generic_construct_civ_factory
+		icon = GFX_focus_industry_profit
 		cost = 10
 		prerequisite = {
 			focus = CHI_central_provinces
 		}
 		x = 2
 		y = 4
-		
-		
-		
 		available = {
-			605 = { is_fully_controlled_by = ROOT }
-			603 = { is_fully_controlled_by = ROOT }
+			605 = {
+				is_fully_controlled_by = ROOT
+			}
+			603 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -360,46 +415,60 @@ focus_tree = {
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_6 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_6
+				}
 				remove_ideas = QIN_idea_payments_of_indemnities_6
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_5 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_5
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_5
 					add_idea = QIN_idea_payments_of_indemnities_6
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_4 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_4
 					add_idea = QIN_idea_payments_of_indemnities_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_3 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_3
 					add_idea = QIN_idea_payments_of_indemnities_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_2 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_2
 					add_idea = QIN_idea_payments_of_indemnities_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities
 					add_idea = QIN_idea_payments_of_indemnities_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -413,12 +482,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 4
-		
-		
-		
 		available = {
-			328 = { is_fully_controlled_by = ROOT }
-			715 = { is_fully_controlled_by = ROOT }
+			328 = {
+				is_fully_controlled_by = ROOT
+			}
+			715 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -440,46 +510,60 @@ focus_tree = {
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_6 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_6
+				}
 				remove_ideas = QIN_idea_payments_of_indemnities_6
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_5 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_5
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_5
 					add_idea = QIN_idea_payments_of_indemnities_6
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_4 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_4
 					add_idea = QIN_idea_payments_of_indemnities_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_3 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_3
 					add_idea = QIN_idea_payments_of_indemnities_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_2 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_2
 					add_idea = QIN_idea_payments_of_indemnities_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities
 					add_idea = QIN_idea_payments_of_indemnities_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -493,14 +577,19 @@ focus_tree = {
 		}
 		x = 4
 		y = 3
-		
-		
-		
 		available = {
-			592 = { is_fully_controlled_by = ROOT }
-			599 = { is_fully_controlled_by = ROOT }
-			594 = { is_fully_controlled_by = ROOT }
-			593 = { is_fully_controlled_by = ROOT }
+			592 = {
+				is_fully_controlled_by = ROOT
+			}
+			599 = {
+				is_fully_controlled_by = ROOT
+			}
+			594 = {
+				is_fully_controlled_by = ROOT
+			}
+			593 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -534,46 +623,60 @@ focus_tree = {
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_6 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_6
+				}
 				remove_ideas = QIN_idea_payments_of_indemnities_6
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_5 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_5
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_5
 					add_idea = QIN_idea_payments_of_indemnities_6
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_4 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_4
 					add_idea = QIN_idea_payments_of_indemnities_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_3 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_3
 					add_idea = QIN_idea_payments_of_indemnities_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_2 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_2
 					add_idea = QIN_idea_payments_of_indemnities_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities
 					add_idea = QIN_idea_payments_of_indemnities_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -587,12 +690,13 @@ focus_tree = {
 		}
 		x = 4
 		y = 4
-		
-		
-		
 		available = {
-			592 = { is_fully_controlled_by = ROOT }
-			594 = { is_fully_controlled_by = ROOT }
+			592 = {
+				is_fully_controlled_by = ROOT
+			}
+			594 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -614,46 +718,60 @@ focus_tree = {
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_6 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_6
+				}
 				remove_ideas = QIN_idea_payments_of_indemnities_6
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_5 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_5
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_5
 					add_idea = QIN_idea_payments_of_indemnities_6
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_4 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_4
 					add_idea = QIN_idea_payments_of_indemnities_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_3 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_3
 					add_idea = QIN_idea_payments_of_indemnities_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities_2 }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities_2
 					add_idea = QIN_idea_payments_of_indemnities_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_payments_of_indemnities }
+				limit = {
+					has_idea = QIN_idea_payments_of_indemnities
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_payments_of_indemnities
 					add_idea = QIN_idea_payments_of_indemnities_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -674,9 +792,6 @@ focus_tree = {
 		x = 2
 		y = 5
 		cancel_if_invalid = no
-		
-		
-		
 		available = {
 		}
 		bypass = {
@@ -684,7 +799,9 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.1
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 10
 		}
@@ -698,12 +815,10 @@ focus_tree = {
 		}
 		x = 6
 		y = 2
-		
-		
-		
-		
 		available = {
-			613 = { is_fully_controlled_by = ROOT }
+			613 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -717,7 +832,9 @@ focus_tree = {
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -731,12 +848,10 @@ focus_tree = {
 		}
 		x = 6
 		y = 4
-		
-		
-		
-		
 		available = {
-			608 = { is_fully_controlled_by = ROOT }
+			608 = {
+				is_fully_controlled_by = ROOT
+			}
 		}
 		bypass = {
 		}
@@ -750,7 +865,9 @@ focus_tree = {
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_INDUSTRY }		
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -772,7 +889,13 @@ focus_tree = {
 		}
 		completion_reward = {
 			random_owned_state = {
-				limit = { is_fully_controlled_by = ROOT infrastructure < 4 NOT = { has_state_flag = CHI_village_mechanization } }
+				limit = {
+					is_fully_controlled_by = ROOT
+					infrastructure < 4
+					NOT = {
+						has_state_flag = CHI_village_mechanization
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 2
@@ -781,7 +904,13 @@ focus_tree = {
 				set_state_flag = CHI_village_mechanization
 			}
 			random_owned_state = {
-				limit = { is_fully_controlled_by = ROOT infrastructure < 4 NOT = { has_state_flag = CHI_village_mechanization } }
+				limit = {
+					is_fully_controlled_by = ROOT
+					infrastructure < 4
+					NOT = {
+						has_state_flag = CHI_village_mechanization
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 2
@@ -790,7 +919,13 @@ focus_tree = {
 				set_state_flag = CHI_village_mechanization
 			}
 			random_owned_state = {
-				limit = { is_fully_controlled_by = ROOT infrastructure < 4 NOT = { has_state_flag = CHI_village_mechanization } }
+				limit = {
+					is_fully_controlled_by = ROOT
+					infrastructure < 4
+					NOT = {
+						has_state_flag = CHI_village_mechanization
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -799,7 +934,13 @@ focus_tree = {
 				set_state_flag = CHI_village_mechanization
 			}
 			random_owned_state = {
-				limit = { is_fully_controlled_by = ROOT infrastructure < 4 NOT = { has_state_flag = CHI_village_mechanization } }
+				limit = {
+					is_fully_controlled_by = ROOT
+					infrastructure < 4
+					NOT = {
+						has_state_flag = CHI_village_mechanization
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -808,7 +949,13 @@ focus_tree = {
 				set_state_flag = CHI_village_mechanization
 			}
 			random_owned_state = {
-				limit = { is_fully_controlled_by = ROOT infrastructure < 4 NOT = { has_state_flag = CHI_village_mechanization } }
+				limit = {
+					is_fully_controlled_by = ROOT
+					infrastructure < 4
+					NOT = {
+						has_state_flag = CHI_village_mechanization
+					}
+				}
 				add_building_construction = {
 					type = infrastructure
 					level = 1
@@ -824,9 +971,6 @@ focus_tree = {
 		cost = 10
 		x = 44
 		y = 0
-		
-		
-		
 		available = {
 		}
 		bypass = {
@@ -834,7 +978,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_army_westernization
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = infantry_weapons
 			}
@@ -843,7 +987,6 @@ focus_tree = {
 			factor = 10
 		}
 	}
-
 	focus = {
 		id = CHI_payment_of_indemnities
 		icon = GFX_focus_usa_reestablish_the_gold_standard
@@ -853,24 +996,28 @@ focus_tree = {
 		}
 		x = 13
 		y = 1
-		
-		
-		
 		available = {
 		}
 		bypass = {
 		}
 		completion_reward = {
 			if = {
-				limit = { tag = QIN }
+				limit = {
+					tag = QIN
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_boxer_protocol
 					add_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { tag = CHI }
-				add_timed_idea = { idea = QIN_idea_profit_transfer days = 365 }
+				limit = {
+					tag = CHI
+				}
+				add_timed_idea = {
+					idea = QIN_idea_profit_transfer
+					days = 365
+				}
 			}
 		}
 		ai_will_do = {
@@ -887,10 +1034,14 @@ focus_tree = {
 		x = 9
 		y = 2
 		cancel_if_invalid = no
-		
-		
 		available = {
-			ENG = { exists = yes has_opinion = { target = ROOT value > 49 } }
+			ENG = {
+				exists = yes
+				has_opinion = {
+					target = ROOT
+					value > 49
+				}
+			}
 		}
 		completion_reward = {
 			custom_effect_tooltip = available_designer
@@ -904,7 +1055,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_chinese_labour_corps
-		icon = GFX_goal_generic_production
+		icon = GFX_focus_socialist_worker
 		cost = 10
 		prerequisite = {
 			focus = CHI_british_manufactures
@@ -912,52 +1063,78 @@ focus_tree = {
 		x = 8
 		y = 3
 		available = {
-			NOT = { has_war_with = ENG }
+			NOT = {
+				has_war_with = ENG
+			}
 		}
 		completion_reward = {
 			if = {
-				limit = { ENG = { NOT = { has_idea = CHI_idea_labour_corps } } }
-				ENG = { add_ideas = CHI_idea_labour_corps add_opinion_modifier = { target = ROOT modifier = CHI_appeased_us } }
+				limit = {
+					ENG = {
+						NOT = {
+							has_idea = CHI_idea_labour_corps
+						}
+					}
+				}
+				ENG = {
+					add_ideas = CHI_idea_labour_corps
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = CHI_appeased_us
+					}
+				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
 				}
-			}			
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -973,54 +1150,68 @@ focus_tree = {
 		x = 10
 		y = 3
 		available = {
-			NOT = { has_war_with = ENG }
+			NOT = {
+				has_war_with = ENG
+			}
 		}
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_purchase_of_machines
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = industry
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
 				}
-			}			
+			}
 		}
 	}
 	focus = {
@@ -1044,46 +1235,58 @@ focus_tree = {
 				type = fighter_equipment_0
 				amount = 30
 				producer = ENG
-			}			
+			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
 				}
-			}			
+			}
 		}
 	}
 	focus = {
@@ -1096,7 +1299,13 @@ focus_tree = {
 		x = 13
 		y = 2
 		available = {
-			JAP = { exists = yes has_opinion = { target = ROOT value > 49 } }
+			JAP = {
+				exists = yes
+				has_opinion = {
+					target = ROOT
+					value > 49
+				}
+			}
 		}
 		completion_reward = {
 			custom_effect_tooltip = available_designer
@@ -1117,45 +1326,57 @@ focus_tree = {
 		y = 3
 		completion_reward = {
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
 				}
 			}
-		}		
+		}
 	}
 	focus = {
 		id = CHI_coastal_defense
@@ -1168,39 +1389,51 @@ focus_tree = {
 		y = 3
 		completion_reward = {
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
@@ -1222,39 +1455,51 @@ focus_tree = {
 		y = 4
 		completion_reward = {
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
@@ -1272,7 +1517,13 @@ focus_tree = {
 		x = 17
 		y = 2
 		available = {
-			GER = { exists = yes has_opinion = { target = ROOT value > 49 } }
+			GER = {
+				exists = yes
+				has_opinion = {
+					target = ROOT
+					value > 49
+				}
+			}
 		}
 		completion_reward = {
 			custom_effect_tooltip = available_designer
@@ -1284,7 +1535,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_mauser_c96_contract
-		icon = GFX_goal_generic_small_arms
+		icon = GFX_focus_german_equipment
 		cost = 10
 		prerequisite = {
 			focus = CHI_german_manufacturer
@@ -1295,39 +1546,51 @@ focus_tree = {
 			custom_effect_tooltip = available_designer
 			show_ideas_tooltip = CHI_mauser
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
@@ -1348,39 +1611,51 @@ focus_tree = {
 			custom_effect_tooltip = available_designer
 			show_ideas_tooltip = CHI_hanyang_arsenal
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
@@ -1404,39 +1679,51 @@ focus_tree = {
 			custom_effect_tooltip = available_military_high_command
 			#show_ideas_tooltip = CHI_hanyang_arsenal
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_5
+				}
 				remove_ideas = QIN_idea_boxer_protocol_5
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_4
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_5
 					remove_idea = QIN_idea_boxer_protocol_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_3
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_4
 					remove_idea = QIN_idea_boxer_protocol_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_2
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_3
 					remove_idea = QIN_idea_boxer_protocol_2
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol_1
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol_1
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
+				limit = {
+					has_idea = QIN_idea_boxer_protocol
+				}
 				swap_ideas = {
 					add_idea = QIN_idea_boxer_protocol_2
 					remove_idea = QIN_idea_boxer_protocol
@@ -1455,7 +1742,9 @@ focus_tree = {
 		}
 		x = 13
 		y = 5
-		search_filters = { FOCUS_FILTER_RESEARCH }
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
 		completion_reward = {
 			add_research_slot = 1
 		}
@@ -1472,12 +1761,37 @@ focus_tree = {
 		}
 		x = 26
 		y = 1
+		bypass = {
+			NOT = {
+				has_government = neutrality
+				tag = QIN
+			}
+		}
 		completion_reward = {
 			add_stability = 0.05
+			add_political_power = 100
+			create_country_leader = {
+				name = "Yikuang" 
+				picture = "gfx/leaders/QIN/QIN_Yikuang.dds" 
+				expire = "1935.1.1" 
+				ideology = autocracy
+				traits = { trait_autocracy }
+			}
+			set_party_name = {
+				ideology = neutrality
+				long_name = QIN_neutrality_cabinet_party
+				name = QIN_neutrality_cabinet_party
+			}
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }	
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
-			factor = 1
+			base = 1
+			modifier = {
+				factor = 100
+				date > 1911.2.1
+			}
 		}
 	}
 	focus = {
@@ -1501,7 +1815,9 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.1
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 500
 		}
@@ -1517,6 +1833,7 @@ focus_tree = {
 		y = 3
 		available = {
 			has_global_flag = xinhai_revolution_ends
+			has_war = no
 		}
 		completion_reward = {
 			add_stability = 0.05
@@ -1532,42 +1849,61 @@ focus_tree = {
 		}
 		x = 21
 		y = 4
-		
-		
-		
 		bypass = {
 		}
 		completion_reward = {
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_4 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_4
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_4
 					add_idea = QIN_idea_low_legitimacy_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_3 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_3
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_3
 					add_idea = QIN_idea_low_legitimacy_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_2 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_2
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_2
 					add_idea = QIN_idea_low_legitimacy_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy
 					add_idea = QIN_idea_low_legitimacy_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }		
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -1577,49 +1913,57 @@ focus_tree = {
 		icon = GFX_goal_generic_military_deal
 		cost = 10
 		prerequisite = {
-			focus = CHI_continue_qing_new_reforms
+			focus = CHI_reform_ministries
 		}
 		x = 23
-		y = 4
-		
-		
-		
+		y = 5
 		available = {
+			has_war = no
 		}
 		bypass = {
 		}
 		completion_reward = {
 			country_event = ww1_qing.2
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_4 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_4
 					add_idea = QIN_idea_low_legitimacy_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_3 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_3
 					add_idea = QIN_idea_low_legitimacy_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_2 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_2
 					add_idea = QIN_idea_low_legitimacy_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy
 					add_idea = QIN_idea_low_legitimacy_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }		
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -1643,9 +1987,14 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = CHI_idea_support_for_revolution
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }	
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 500
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1662,10 +2011,16 @@ focus_tree = {
 			has_global_flag = xinhai_revolution_ends
 		}
 		completion_reward = {
-			add_timed_idea = { idea = CHI_idea_restore_the_nation days = 365 }
+			add_timed_idea = {
+				idea = CHI_idea_restore_the_nation
+				days = 365
+			}
 		}
 		ai_will_do = {
 			factor = 1
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1677,17 +2032,17 @@ focus_tree = {
 		}
 		x = 25
 		y = 4
-		
-		
-		
 		available = {
 			has_war_support > 0.1
 		}
-		completion_reward = {			
+		completion_reward = {
 			swap_ideas = {
 				remove_idea = CHI_idea_army_corruption3
 				add_idea = CHI_idea_army_corruption2
 			}
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1699,9 +2054,6 @@ focus_tree = {
 		}
 		x = 27
 		y = 4
-		
-		
-		
 		available = {
 			has_idea = CHI_idea_inflation5
 		}
@@ -1709,8 +2061,19 @@ focus_tree = {
 		}
 		completion_reward = {
 			remove_ideas = CHI_idea_inflation5
-			add_timed_idea = { idea = CHI_idea_inflation4 days = 70 }
-			hidden_effect = { country_event = { id = ww1_china.7 days = 70 } }
+			add_timed_idea = {
+				idea = CHI_idea_inflation4
+				days = 70
+			}
+			hidden_effect = {
+				country_event = {
+					id = ww1_china.7
+					days = 70
+				}
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1722,9 +2085,6 @@ focus_tree = {
 		}
 		x = 27
 		y = 5
-		
-		
-		
 		available = {
 			has_idea = CHI_idea_inflation3
 		}
@@ -1732,22 +2092,27 @@ focus_tree = {
 		}
 		completion_reward = {
 			remove_ideas = CHI_idea_inflation3
-			add_timed_idea = { idea = CHI_idea_inflation2 days = 70 }
-			hidden_effect = { country_event = { id = ww1_china.7 days = 70 } }
+			add_timed_idea = {
+				idea = CHI_idea_inflation2
+				days = 70
+			}
+			hidden_effect = {
+				country_event = {
+					id = ww1_china.7
+					days = 70
+				}
+			}
 		}
 	}
 	focus = {
 		id = CHI_pay_off_debts
-		icon = GFX_goal_generic_forceful_treaty
+		icon = GFX_focus_looming_debts
 		cost = 10
 		prerequisite = {
 			focus = CHI_land_reform
 		}
 		x = 27
 		y = 6
-		
-		
-		
 		available = {
 			has_idea = CHI_idea_inflation
 		}
@@ -1767,20 +2132,35 @@ focus_tree = {
 		}
 		x = 29
 		y = 4
+		available = {
+			has_government = neutrality
+		}
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = CHI_zhao_bingjun
 			if = {
-				limit = { NOT = { has_completed_focus = CHI_kuomintang } }
+				limit = {
+					NOT = {
+						has_completed_focus = CHI_kuomintang
+					}
+				}
 				add_popularity = {
 					ideology = fascism
 					popularity = 0.05
 				}
 			}
 			if = {
-				limit = { has_completed_focus = CHI_kuomintang }
+				limit = {
+					has_completed_focus = CHI_kuomintang
+				}
 				add_political_power = 100
 			}
+			hidden_effect = {
+				set_capital = 608
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1792,8 +2172,17 @@ focus_tree = {
 		}
 		x = 29
 		y = 5
+		available = {
+			has_government = neutrality
+		}
 		completion_reward = {
 			add_ideas = CHI_idea_beiyang_government
+			hidden_effect = {
+				set_capital = 608
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1805,8 +2194,17 @@ focus_tree = {
 		}
 		x = 31
 		y = 4
+		available = {
+			has_government = neutrality
+		}
 		completion_reward = {
 			add_stability = 0.05
+			hidden_effect = {
+				set_capital = 608
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1818,6 +2216,9 @@ focus_tree = {
 		}
 		x = 31
 		y = 5
+		available = {
+			has_government = neutrality
+		}
 		completion_reward = {
 			add_war_support = 0.1
 			custom_effect_tooltip = available_political_advisor
@@ -1827,6 +2228,12 @@ focus_tree = {
 				amount = 5000
 				producer = CHI
 			}
+			hidden_effect = {
+				set_capital = 608
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1843,116 +2250,47 @@ focus_tree = {
 		y = 6
 		available = {
 			has_stability > 0.35
+			has_war = no #until kill some republics
+			has_country_leader = {
+				name = "Yuan Shikai"
+				ruling_only = yes
+			}
 		}
 		bypass = {
-			has_global_flag = yuan_shikai_dead
 		}
 		completion_reward = {
-			country_event = { id = ww1_china.1 }
+			country_event = {
+				id = ww1_china.1
+				hours = 2
+			}
 			remove_ideas = CHI_idea_republican_plot
+			hidden_effect = {
+				set_capital = 608
+				retire_ideology_leader = fascism
+			}
 			create_country_leader = {
-				name = "Yuan Shikai"
+				name = "Hongxian Emperor"
 				picture = "gfx/leaders/CHI/CHI_yuan_shikai_emperor.dds"
 				expire = "1935.1.1"
-				ideology = military_dictatorship
-				
+				ideology = fascism_ideology
+				traits = {
+					#trait_proto_fascism, added by an event
+				}
 			}
 			set_politics = {
 				ruling_party = fascism
-				last_election = "1912.1.1"
-				election_frequency = 60 
 				elections_allowed = no
 			}
 		}
-	}
-	focus = {
-		id = CHI_protect_second_empire #Возможность сохранить правительство милитаристов. Однако, отделится Анхой и Чжили.
-		icon = GFX_focus_chi_anhui_clique
-		cost = 10
-		prerequisite = {
-			focus = CHI_second_empire
-		}
-		mutually_exclusive = {
-			focus = CHI_national_protection_war
-		}
-		x = 30
-		y = 7
-		available = {
-			has_idea = CHI_idea_government_divided
-		}
-		completion_reward = {
-			remove_ideas = CHI_idea_government_divided
-			if = {
-				limit = {
-					has_global_flag = warlord_era
-					NOT = { has_global_flag = manchu_restoration }
-				}
-				custom_effect_tooltip = manchu_restoration_tt
-				country_event = ww1_china.9
-			}
-			if = {
-				limit = {
-					has_global_flag = manchu_restoration
-				}
-				add_stability = 0.05
-			}
-			set_politics = {
-				ruling_party = neutrality
-				last_election = "1910.1.1"
-				election_frequency = 60 
-				elections_allowed = no
-			}
-			hidden_effect = {
-				set_cosmetic_tag = CHI_uprising
-			}
-			add_popularity = {
-				ideology = neutrality
-				popularity = 0.25
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 100
+				date > 1915.10.1
 			}
 		}
-	}
-	focus = {
-		id = CHI_national_protection_war #Возможность возглавить клику, которая в итоге может стать центром Гоминьдана или КПК.
-		icon = GFX_goal_generic_attack_allies
-		cost = 5
-		prerequisite = {
-			focus = CHI_second_empire
-			focus = CHI_suppress_monarchists
-		}
-		mutually_exclusive = {
-			focus = CHI_protect_second_empire
-		}
-		mutually_exclusive = {
-			focus = CHI_preservation_of_the_nation
-		}
-		x = 32
-		y = 7
-		available = {
-			NOT = { has_global_flag = warlord_era }
-		}
-		completion_reward = {
-			custom_effect_tooltip = CHI_national_protection_war_tt
-			unlock_decision_category_tooltip = CHI_warlord_era	
-			if = {
-				limit = { has_idea = CHI_idea_beiyang_government }
-				remove_ideas = CHI_idea_beiyang_government
-			}
-			if = {
-				limit = { has_idea = CHI_idea_three_principles }
-				remove_ideas = CHI_idea_three_principles
-			}
-			set_politics = {
-				ruling_party = neutrality
-				last_election = "1910.1.1"
-				election_frequency = 60 
-				elections_allowed = no
-			}
-			hidden_effect = {
-				add_popularity = {
-					ideology = neutrality
-					popularity = 0.25
-				}
-			}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -1969,13 +2307,8 @@ focus_tree = {
 		y = 3
 		available = {
 			has_civil_war = no
-			has_global_flag = xinhai_revolution_ends		
+			has_global_flag = xinhai_revolution_ends
 		}
-		bypass = {
-		}
-		
-		
-		
 		completion_reward = {
 			custom_effect_tooltip = CHI_yuan_shikai_or_sun_yatsen_tt
 			swap_ideas = {
@@ -1984,9 +2317,13 @@ focus_tree = {
 			}
 			set_politics = {
 				ruling_party = neutrality
-				last_election = "1910.1.1"
-				election_frequency = 48 
-				elections_allowed = no 
+				elections_allowed = yes
+			} 
+			set_capital = 608
+			set_party_name = {
+				ideology = neutrality
+				long_name = CHI_neutrality_party
+				name = CHI_neutrality_party
 			}
 			hidden_effect = {
 				create_country_leader = {
@@ -1994,7 +2331,10 @@ focus_tree = {
 					picture = "gfx/leaders/CHI/CHI_yuan_shikai.dds"
 					expire = "1935.1.1"
 					ideology = oligarchism
-					
+					traits = {
+						generallissimo
+						trait_oligarchism
+					}
 				}
 				set_popularities = {
 					fascism = 25
@@ -2002,8 +2342,15 @@ focus_tree = {
 					democratic = 28
 					neutrality = 47
 				}
-				country_event = { id = ww1_xinhai.6 days = 1 }
+				country_event = {
+					id = ww1_xinhai.6
+					days = 1
+				}
 			}
+			remove_unit_leader = 15096
+		}
+		search_filters = {
+			FOCUS_FILTER_HISTORICAL
 		}
 	}
 	focus = {
@@ -2022,9 +2369,6 @@ focus_tree = {
 			has_civil_war = no
 			has_global_flag = xinhai_revolution_ends
 		}
-		
-		
-		
 		completion_reward = {
 			custom_effect_tooltip = CHI_yuan_shikai_or_sun_yatsen_tt
 			swap_ideas = {
@@ -2033,17 +2377,17 @@ focus_tree = {
 			}
 			set_politics = {
 				ruling_party = democratic
-				last_election = "1910.1.1"
-				election_frequency = 48 
-				elections_allowed = yes 
+				elections_allowed = yes
 			}
 			hidden_effect = {
 				create_country_leader = {
-					name = "Sun Yat-Sen"
+					name = "Sun Yat-sen"
 					picture = "gfx/leaders/CHI/CHI_sun_wen.dds"
 					expire = "1935.1.1"
 					ideology = socialism
-					
+					traits = {
+						trait_socialism
+					}
 				}
 				set_popularities = {
 					fascism = 28
@@ -2051,19 +2395,25 @@ focus_tree = {
 					democratic = 47
 					neutrality = 25
 				}
-				country_event = { id = ww1_xinhai.7 days = 1 }
+				country_event = {
+					id = ww1_xinhai.7
+					days = 1
+				}
 			}
 		}
 	}
 	focus = {
 		id = CHI_unite_opposition
-		icon = GFX_focus_generic_military_academy
+		icon = GFX_focus_chi_people_defence
 		cost = 10
 		prerequisite = {
 			focus = CHI_kuomintang
 		}
 		x = 33
 		y = 4
+		available = {
+			has_government = democratic
+		}
 		completion_reward = {
 			add_popularity = {
 				ideology = democratic
@@ -2073,13 +2423,16 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_fight_against_militarists
-		icon = GFX_goal_generic_political_pressure
+		icon = GFX_focus_army_purge
 		cost = 10
 		prerequisite = {
 			focus = CHI_unite_opposition
 		}
 		x = 33
 		y = 5
+		available = {
+			has_government = democratic
+		}
 		completion_reward = {
 			add_stability = 0.05
 			add_popularity = {
@@ -2090,13 +2443,16 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_party_expansion
-		icon = GFX_focus_chi_one_china_policy
+		icon = GFX_focus_chi_united_front
 		cost = 10
 		prerequisite = {
 			focus = CHI_kuomintang
 		}
 		x = 35
 		y = 4
+		available = {
+			has_government = democratic
+		}
 		completion_reward = {
 			custom_effect_tooltip = available_political_advisor
 			show_ideas_tooltip = CHI_lu_zhengxiang
@@ -2115,6 +2471,9 @@ focus_tree = {
 		}
 		x = 35
 		y = 5
+		available = {
+			has_government = democratic
+		}
 		completion_reward = {
 			add_ideas = CHI_idea_three_principles
 		}
@@ -2133,61 +2492,28 @@ focus_tree = {
 		y = 6
 		available = {
 			has_stability > 0.35
+			has_war = no
+			has_government = democratic
 		}
 		completion_reward = {
 			remove_ideas = CHI_idea_militarist_plot
-			country_event = { id = ww1_china.6 }
-		}
-	}
-	focus = {
-		id = CHI_denouncement_boxer_protocols
-		icon = GFX_focus_renounce_the_treaty_of_trianon
-		cost = 10
-		prerequisite = {
-			focus = CHI_protect_second_empire
-			focus = CHI_mandate_of_heaven
-		}
-		x = 26
-		y = 8
-		available = {
-			has_army_manpower = {
-				size > 1000000
+			country_event = {
+				id = ww1_china.6
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_cosmetic_tag = CHI_uprising
+					}
+					drop_cosmetic_tag = yes
+				}
 			}
 		}
-		bypass = {
-			NOT = {
-				has_idea = QIN_idea_boxer_protocol
-				has_idea = QIN_idea_boxer_protocol_1
-				has_idea = QIN_idea_boxer_protocol_2
-				has_idea = QIN_idea_boxer_protocol_3
-				has_idea = QIN_idea_boxer_protocol_4
-				has_idea = QIN_idea_boxer_protocol_5
-			}
-		}
-		completion_reward = {
-			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_5 }
-				remove_ideas = QIN_idea_boxer_protocol_5
-			}
-			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_4 }
-				remove_ideas = QIN_idea_boxer_protocol_4
-			}
-			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_3 }
-				remove_ideas = QIN_idea_boxer_protocol_3
-			}
-			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_2 }
-				remove_ideas = QIN_idea_boxer_protocol_2
-			}
-			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol_1 }
-				remove_ideas = QIN_idea_boxer_protocol_1
-			}
-			if = {
-				limit = { has_idea = QIN_idea_boxer_protocol }
-				remove_ideas = QIN_idea_boxer_protocol
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 100
+				date > 1915.10.1
 			}
 		}
 	}
@@ -2199,81 +2525,145 @@ focus_tree = {
 			focus = CHI_appeal_to_the_militarists
 		}
 		prerequisite = {
-			focus = CHI_reform_ministries
+			focus = CHI_pacify_beiyang_army
 		}
 		x = 22
 		y = 6
-		
-		
-		
 		available = {
-			QIN = { has_country_flag = puyi_age }
+			QIN = {
+				has_country_flag = puyi_age
+			}
 		}
 		bypass = {
 		}
 		completion_reward = {
 			create_country_leader = {
 				name = "Xuantong"
-				picture="gfx/leaders/QIN/QIN_xuantong.dds"
+				picture = "gfx/leaders/CHI/CHI_xuantong.dds"
 				expire = "1935.1.1"
 				ideology = autocracy
-				
+				traits = {
+					trait_autocracy
+				}
 			}
-			set_party_name = { 
+			if = {
+				limit = {
+					date > 1927.3.31
+				}
+				create_country_leader = {
+					name = "Liang Qichao"
+					picture = "gfx/leaders/CHI/CHI_Liang_Qichao.dds"
+					expire = "1935.1.1"
+					ideology = conservatism
+					traits = {
+						trait_conservatism
+					}
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Kang Youwei"
+					picture = "gfx/leaders/CHI/CHI_Kang_Youwei.dds"
+					expire = "1935.1.1"
+					ideology = conservatism
+					traits = {
+						trait_conservatism
+					}
+				}
+			}
+			set_party_name = {
 				ideology = neutrality
 				long_name = QIN_neutrality_party_puyi
 				name = QIN_neutrality_party_puyi
 			}
+			set_party_name = {
+				ideology = democratic
+				long_name = QIN_progressive_party
+				name = QIN_progressive_party
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.4
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.6
+			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_4 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_4
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_4
 					add_idea = QIN_idea_low_legitimacy_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_3 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_3
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_3
 					add_idea = QIN_idea_low_legitimacy_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_2 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_2
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_2
 					add_idea = QIN_idea_low_legitimacy_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy
+					NOT = {
+						has_completed_focus = CHI_pacify_beiyang_army
+					}
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy
 					add_idea = QIN_idea_low_legitimacy_2
 				}
 			}
+			hidden_effect = {
+				country_event = {
+					id = ww1_qing.6
+					days = 1
+				}
+			}
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }		
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
 	focus = {
 		id = CHI_recover_transport_system
-		icon = GFX_goal_generic_military_sphere
+		icon = GFX_focus_train_railroads
 		cost = 10
 		prerequisite = {
 			focus = CHI_militia_reorganization
 		}
 		x = 25
 		y = 5
-		
-		
-		
 		available = {
 			has_war_support > 0.25
 		}
-		completion_reward = {			
+		completion_reward = {
 			swap_ideas = {
 				remove_idea = CHI_idea_army_corruption2
 				add_idea = CHI_idea_army_corruption
@@ -2290,18 +2680,71 @@ focus_tree = {
 		x = 22
 		y = 7
 		available = {
-			is_puppet = no
+			is_subject = no
+			NOT = {
+				has_country_flag = warlord_compromise
+			}
+			CHI = {
+				exists = no
+			}
+			GXC = {
+				exists = no
+			}
+			JNC = {
+				exists = no
+			}
+			SDC = {
+				exists = no
+			}
+			FNG = {
+				exists = no
+			}
 		}
 		completion_reward = {
+			add_stability = 0.3
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = MON
+						is_core_of = TIB
+					}
+				}
+				add_core_of = ROOT
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 408
+						state = 409
+						state = 441
+						state = 537
+						state = 560
+						state = 561
+						state = 589
+						state = 601
+						state = 655
+						state = 671
+					}
+				}
+				ROOT = {
+					add_state_claim = PREV
+				}
+			}
 			every_country = {
 				limit = {
-					NOT = { tag = QIN }
-					any_owned_state = {
-						is_core_of = QIN		
+					NOT = {
+						tag = QIN
 					}
-					NOT = { has_war_with = QIN }
+					any_owned_state = {
+						is_core_of = QIN
+					}
+					NOT = {
+						has_war_with = QIN
+					}
 				}
-				country_event = { id = ww1_qing.4 }
+				country_event = {
+					id = ww1_qing.4
+				}
 			}
 		}
 	}
@@ -2314,9 +2757,6 @@ focus_tree = {
 		}
 		x = 25
 		y = 6
-		
-		
-		
 		available = {
 			has_war_support > 0.5
 		}
@@ -2324,28 +2764,6 @@ focus_tree = {
 			army_experience = 25
 			remove_ideas = CHI_idea_army_corruption
 		}
-	}
-	focus = {
-		id = CHI_anti_colonial_empire
-		icon = GFX_goal_anschluss
-		cost = 10
-		prerequisite = {
-			focus = CHI_denouncement_boxer_protocols
-		}
-		x = 26
-		y = 9
-
-	}
-	focus = {
-		id = CHI_fight_for_unity
-		icon = GFX_goal_generic_major_war
-		cost = 10
-		prerequisite = {
-			focus = CHI_anti_colonial_empire
-		}
-		x = 26
-		y = 10
-
 	}
 	focus = {
 		id = CHI_cooperation_wtih_dominions
@@ -2356,219 +2774,61 @@ focus_tree = {
 		}
 		x = 8
 		y = 5
-
-	}
-	focus = {
-		id = CHI_born_of_chinese_communism
-		icon = GFX_goal_generic_war_with_comintern
-		cost = 10
-		prerequisite = {
-			focus = CHI_protect_second_empire
-			focus = CHI_preservation_of_the_nation
-		}
-		x = 32
-		y = 8
-		mutually_exclusive = {
-			focus = CHI_revival_of_kuomntang
-		}
-		mutually_exclusive = {
-			focus = CHI_retake_mongolia
-		}
-		available = {
-			has_global_flag = warlord_era
-		}
-		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			#show_ideas_tooltip = CHI_chen_duxiu #communist_revolutionary
-			create_country_leader = {
-				name = "Mao Zedong"
-				picture = "gfx/leaders/CHI/CHI_mao_zedong.dds"
-				expire = "1935.1.1"
-				ideology = vanguardism
-				
-			}
-			add_popularity = {
-				ideology = communism
-				popularity = 0.1
-			}
-		}
-	}
-	focus = {
-		id = CHI_revival_of_kuomntang
-		icon = GFX_focus_chi_whampoa_military_academy
-		cost = 10
-		prerequisite = {
-			focus = CHI_preservation_of_the_nation
-		}
-		mutually_exclusive = {
-			focus = CHI_born_of_chinese_communism
-		}
-		x = 34
-		y = 8
-		
-		
-		
-		available = {
-			OR = {
-				has_completed_focus = CHI_preservation_of_the_nation
-				AND = {
-					has_global_flag = guangzhou_clique
-					has_completed_focus = CHI_national_protection_war
-				}
-			}
-			has_global_flag = warlord_era
-		}
-		completion_reward = {
-			hidden_effect = {
-				drop_cosmetic_tag = yes
-			}
-			if = {
-				limit = { NOT = { has_completed_focus = CHI_preservation_of_the_nation } }
-				add_stability = 0.05
-				create_country_leader = {
-					name = "Chiang Kai-shek"
-					picture = "gfx/leaders/CHI/CHI_chiang_kai_shek.dds"
-					expire = "1935.1.1"
-					ideology = oligarchism
-					
-				}
-			}
-			if = {
-				limit = { has_completed_focus = CHI_preservation_of_the_nation }
-				add_stability = 0.05
-				add_popularity = {
-					ideology = democratic
-					popularity = 0.05
-				}
-				create_country_leader = {
-					name = "Chiang Kai-shek"
-					picture = "gfx/leaders/CHI/CHI_chiang_kai_shek.dds"
-					expire = "1935.1.1"
-					ideology = conservatism
-					
-				}
-			}
-		}
-	}
-	focus = {
-		id = CHI_retake_mongolia
-		icon = GFX_goal_generic_occupy_states_ongoing_war
-		cost = 10
-		prerequisite = {
-			focus = CHI_protect_second_empire
-		}
-		mutually_exclusive = {
-			focus = CHI_born_of_chinese_communism
-		}
-		x = 30
-		y = 8
-		bypass = {
-			MON = { exists = no }
-		}
-		available = {
-			owns_state = 608
-			has_army_manpower = {
-				size > 250000
-			}
-		}
-		completion_reward = {
-			if = {
-				limit = { MON = { is_puppet_of = RUS } }
-				RUS = { country_event = { id = ww1_china.26 days = 30 } }
-			}
-			annex_country = {
-				target = MON
-				transfer_troops = no
-			}			
-		}
-	}	
-	focus = {
-		id = CHI_northern_expedition
-		icon = GFX_focus_chi_one_china_policy
-		cost = 10
-		prerequisite = {
-			focus = CHI_revival_of_kuomntang
-		}
-		x = 34
-		y = 9
-		completion_reward = {
-			create_wargoal = {
-				type = annex_everything
-				target = JXC
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = ZHE
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = HNC
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = GZC
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = JNC
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = ANC
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = SDC
-			}
-		}
 	}
 	focus = {
 		id = CHI_reform_ministries
 		icon = GFX_goal_generic_intelligence_exchange
 		cost = 10
 		prerequisite = {
-			focus = CHI_pacify_beiyang_army
+			focus = CHI_continue_qing_new_reforms
 		}
 		x = 23
-		y = 5
-		
-		
-		
+		y = 4
 		available = {
 		}
 		bypass = {
 		}
 		completion_reward = {
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_4 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_4
 					add_idea = QIN_idea_low_legitimacy_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_3 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_3
 					add_idea = QIN_idea_low_legitimacy_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_2 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_2
 					add_idea = QIN_idea_low_legitimacy_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy
 					add_idea = QIN_idea_low_legitimacy_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }		
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 1
 		}
@@ -2582,9 +2842,6 @@ focus_tree = {
 		}
 		x = 21
 		y = 5
-		
-		
-		
 		available = {
 		}
 		bypass = {
@@ -2592,127 +2849,47 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.05
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_4 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_4
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_4
 					add_idea = QIN_idea_low_legitimacy_5
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_3 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_3
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_3
 					add_idea = QIN_idea_low_legitimacy_4
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy_2 }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy_2
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy_2
 					add_idea = QIN_idea_low_legitimacy_3
 				}
 			}
 			if = {
-				limit = { has_idea = QIN_idea_low_legitimacy }
+				limit = {
+					has_idea = QIN_idea_low_legitimacy
+				}
 				swap_ideas = {
 					remove_idea = QIN_idea_low_legitimacy
 					add_idea = QIN_idea_low_legitimacy_2
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL }		
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
 		ai_will_do = {
 			factor = 1
-		}
-	}
-	focus = {
-		id = CHI_war_with_fengtian
-		icon = GFX_focus_chi_zhili_clique
-		cost = 10
-		prerequisite = {
-			focus = CHI_retake_mongolia
-		}
-		x = 30
-		y = 9
-		available = {
-			is_puppet = no
-			NOT = { is_in_faction_with = FNG }
-			MAN = { exists = no }
-		}
-		bypass = {
-			has_war_with = FNG
-		}
-		completion_reward = {
-			create_wargoal = {
-				target = FNG
-				type = annex_everything
-			}
-		}
-	}
-	focus = {
-		id = CHI_strengthen_legitimacy
-		icon = GFX_goal_generic_propaganda
-		cost = 10
-		prerequisite = {
-			focus = CHI_northern_expedition
-			focus = CHI_long_march
-			focus = CHI_war_with_fengtian
-		}
-		x = 32
-		y = 10
-		completion_reward = {
-			add_political_power = 150
-			set_global_flag = reunite_china
-			set_rule = { can_create_factions = yes }
-		}
-	}
-	focus = {
-		id = CHI_long_march
-		icon = GFX_focus_chi_cooperation_with_the_communists
-		cost = 10
-		prerequisite = {
-			focus = CHI_born_of_chinese_communism
-		}
-		x = 32
-		y = 9
-		available = {
-			communism > 0.25
-		}
-		completion_reward = {
-			country_event = ww1_china.36
-		}
-	}
-	focus = {
-		id = CHI_preservation_of_the_nation
-		icon = GFX_focus_spr_masters_of_our_own_fate
-		cost = 10
-		prerequisite = {
-			focus = CHI_suppress_monarchists
-		}
-		mutually_exclusive = {
-			focus = CHI_national_protection_war
-		}
-		x = 34
-		y = 7
-		available = {
-			has_idea = CHI_idea_government_divided
-		}
-		completion_reward = {
-			custom_effect_tooltip = manchu_restoration_tt
-			remove_ideas = CHI_idea_government_divided
-			if = {
-				limit = {
-					has_global_flag = warlord_era
-					NOT = { has_global_flag = manchu_restoration }
-				}
-				country_event = ww1_china.9
-			}
-			if = {
-				limit = {
-					has_global_flag = manchu_restoration
-				}
-				add_stability = 0.05
-			}
 		}
 	}
 	focus = {
@@ -2728,22 +2905,26 @@ focus_tree = {
 			focus = CHI_unite_provincial_command
 		}
 		available = {
-			has_global_flag = warlord_era
+			has_war = no
+			OR = {
+				has_global_flag = warlord_era
+				has_global_flag = warlord_era_end
+			}
+			if = {
+				limit = {
+					original_tag = CHI
+				}
+				has_global_flag = constitutional_protection_war
+			}
+			NOT = { has_idea = CHI_idea_government_divided }
 		}
 		completion_reward = {
+			hidden_effect = {
+				set_country_flag = ready_to_unite_china
+			}
 			custom_effect_tooltip = CHI_united_china_tt
 		}
 	}
-	#focus = {
-	#	id = CHI_spread_the_virus
-	#	icon = GFX_goal_generic_secret_weapon
-	#	cost = 10
-	#	x = 32
-	#	y = 29
-	#	available = {
-	#		has_completed_focus = CHI_strengthen_legitimacy
-	#	}
-	#}
 	focus = {
 		id = CHI_recovery_of_naval_infrastructure
 		icon = GFX_goal_generic_construct_naval_dockyard
@@ -2751,11 +2932,18 @@ focus_tree = {
 		x = 39
 		y = 0
 		available = {
-			any_owned_state = { is_coastal = yes }
+			any_owned_state = {
+				is_coastal = yes
+			}
 		}
 		completion_reward = {
 			random_owned_state = {
-				limit = { is_coastal = yes NOT = { has_state_flag = CHI_recovery_of_naval_infrastructure } }
+				limit = {
+					is_coastal = yes
+					NOT = {
+						has_state_flag = CHI_recovery_of_naval_infrastructure
+					}
+				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
@@ -2765,7 +2953,12 @@ focus_tree = {
 				set_state_flag = CHI_recovery_of_naval_infrastructure
 			}
 			random_owned_state = {
-				limit = { is_coastal = yes NOT = { has_state_flag = CHI_recovery_of_naval_infrastructure } }
+				limit = {
+					is_coastal = yes
+					NOT = {
+						has_state_flag = CHI_recovery_of_naval_infrastructure
+					}
+				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
@@ -2775,7 +2968,12 @@ focus_tree = {
 				set_state_flag = CHI_recovery_of_naval_infrastructure
 			}
 			random_owned_state = {
-				limit = { is_coastal = yes NOT = { has_state_flag = CHI_recovery_of_naval_infrastructure } }
+				limit = {
+					is_coastal = yes
+					NOT = {
+						has_state_flag = CHI_recovery_of_naval_infrastructure
+					}
+				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
@@ -2798,7 +2996,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_destroyers_fleet
-				bonus = 1.0
+				bonus = 1
 				uses = 1
 				category = dd_tech
 			}
@@ -2819,7 +3017,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_marine_engineering
-		icon = GFX_goal_generic_production2
+		icon = GFX_focus_otto_naval_train
 		cost = 10
 		prerequisite = {
 			focus = CHI_admiralty
@@ -2849,7 +3047,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_submarine_fleet
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = ss_tech
 			}
@@ -2871,7 +3069,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_maneuverable_fleet
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = cl_tech
 				category = ca_tech
@@ -2894,7 +3092,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_dreadnought_fever
-				bonus = 1.0
+				bonus = 1
 				uses = 1
 				category = bb_tech
 			}
@@ -2902,7 +3100,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_domestic_fleet_doctrine
-		icon = GFX_focus_generic_treaty
+		icon = GFX_focus_battleship_production
 		cost = 10
 		prerequisite = {
 			focus = CHI_maneuverable_fleet
@@ -2914,7 +3112,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_send_officers_to_military_shcools
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = naval_doctrine
 			}
@@ -2930,9 +3128,6 @@ focus_tree = {
 		x = 43
 		y = 1
 		cancel_if_invalid = no
-		
-		
-		
 		available = {
 		}
 		bypass = {
@@ -2953,9 +3148,6 @@ focus_tree = {
 		}
 		x = 42
 		y = 2
-		
-		
-		
 		available = {
 			has_global_flag = warlord_era
 		}
@@ -2964,7 +3156,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_the_armies_of_warlords
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = land_doctrine
 			}
@@ -2982,7 +3174,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_send_officers_to_military_shcools
-				bonus = 1.0
+				bonus = 1
 				uses = 1
 				category = land_doctrine
 			}
@@ -3000,7 +3192,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_towed_artillery
-				bonus = 1.0
+				bonus = 1
 				uses = 1
 				category = artillery
 			}
@@ -3019,7 +3211,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_support_corps
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = support_tech
 			}
@@ -3037,7 +3229,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_train_engineers
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = light_fighter
 			}
@@ -3055,7 +3247,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_train_pilots
-				bonus = 1.0
+				bonus = 1
 				uses = 2
 				category = air_doctrine
 			}
@@ -3063,7 +3255,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_armored_vehicles
-		icon = GFX_goal_generic_army_tanks
+		icon = GFX_focus_early_tank
 		cost = 10
 		prerequisite = {
 			focus = CHI_train_engineers
@@ -3073,7 +3265,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = CHI_armored_vehicles
-				bonus = 1.0
+				bonus = 1
 				uses = 1
 				category = armor
 			}

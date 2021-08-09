@@ -32,14 +32,12 @@ country_event = {
 		OR = { NOT = { tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		NOT = {
-			OR = {
+			has_war = yes
+			any_neighbor_country = {
 				has_war = yes
-				any_neighbor_country = {
-					has_war = yes
-				}
-				any_allied_country = {
-					has_war = yes
-				}
+			}
+			any_allied_country = {
+				has_war = yes
 			}
 		}
 		has_idea = partial_economic_mobilisation
@@ -377,6 +375,14 @@ country_event = {
 		start_civil_war = {
 			ideology = communism
 			size = 0.5
+			keep_unit_leaders_trigger = {
+				OR = {
+					has_trait = ENG_royalist
+					has_trait = trait_royal
+					has_trait = old_guard
+					has_trait = politically_connected						
+				}
+			}	
 		}
 	}
 }

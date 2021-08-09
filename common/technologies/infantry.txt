@@ -1329,27 +1329,82 @@ technologies = {
 			bicycle_battalion
 		}		
 	}
-	rocket_site = {
+	# rocket_site = {
+	# 	allow = {
+	# 		always = no
+	# 	}
+	# 	research_cost = 1
+	# 	start_year = 1910
+	# 	enable_building = {
+	# 		building = rocket_site
+	# 		level = 1
+	# 	}		
+	# }
+	# nuclear_reactor = {
+	# 	allow = {
+	# 		always = no
+	# 	}
+	# 	research_cost = 1
+	# 	start_year = 1910
+	# 	enable_building = {
+	# 		building = nuclear_reactor
+	# 		level = 1
+	# 	}
+	# 	nuclear_production = 1		
+	# }
+	
+	camelry = {
+		
 		allow = {
 			always = no
 		}
+
 		research_cost = 1
-		start_year = 1910
-		enable_building = {
-			building = rocket_site
-			level = 1
+		start_year = 1900
+
+		enable_subunits = {
+			camelry
 		}		
 	}
-	nuclear_reactor = {	
+
+	ITA_modernized_cavalry_tech = {
+		research_cost = 1
+		# only from focus!!! #####
 		allow = {
 			always = no
 		}
-		research_cost = 1
-		start_year = 1910
-		enable_building = {
-			building = nuclear_reactor
-			level = 1
+		#If you change these
+		#Change the custom tooltip too:ITA_cavalry_modernisation_effect
+		cavalry = {
+			forest = {
+				attack = 0.02
+				movement = 0.05
+			}
+			urban = {
+				attack = 0.05 
+				movement = 0.05
+			}
 		}
-		nuclear_production = 1		
 	}
+	ITA_savari_tech = {
+		research_cost = 1
+		# only from focus!!! #####
+		allow = {
+			always = no
+		}
+		#If you change these
+		#Change the custom tooltip too:ITA_cavalry_modernisation_effect
+		cavalry = {
+			desert = {
+				attack = 0.05
+				movement = 0.05
+			}
+		}
+		camelry = {
+			desert = {
+				attack = 0.05
+				movement = 0.05
+			}
+		}
+	}	
 }

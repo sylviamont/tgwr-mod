@@ -1,7 +1,7 @@
 ﻿capital = 330
 
 set_research_slots = 2
-set_stability = 0.50
+set_stability = 0.4
 set_convoys = 0
 
 create_country_leader = {
@@ -9,26 +9,30 @@ create_country_leader = {
 	picture = "gfx/leaders/MON/MON_bogd_khan.dds" 
 	expire = "1935.1.1" 
 	ideology = theocracy
-	 
+	traits = { trait_theocracy }  
+}
+create_country_leader = {
+	name = "Bogd Khan" 
+	picture = "gfx/leaders/MON/MON_bogd_khan.dds" 
+	expire = "1935.1.1" 
+	ideology = fundamentalism
+	traits = { trait_fundamentalism }  
 }
 create_country_leader = {
 	name = "Balingiin Tserendorj" 
 	picture = "gfx/leaders/MON/MON_balingiin_tserendorj.dds" 
 	expire = "1935.1.1" 
 	ideology = religious_communism
-	 
+	traits = { trait_religious_communism } 
 }
 
 1910.1.1 = {
-	oob = "MON_1910"
-
 	set_technology = {
 		#infantry
 		infantry_weapons = 1
 		
 		#support
 		tech_support = 1
-		tech_recon = 1
 	}
 	
 	set_politics = {
@@ -38,12 +42,9 @@ create_country_leader = {
 	    elections_allowed = no
 	}
 	set_popularities = {
-	    democratic = 0
-	    fascism = 0
-	    communism = 0
-	    neutrality = 100
+	    democratic = 6
+	    fascism = 31
+	    communism = 1
+	    neutrality = 62
 	}
-
-	add_ideas = {
-	}	
 }

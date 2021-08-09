@@ -10,51 +10,48 @@ create_faction = entente
 add_to_faction = FRA
 add_to_faction = RUS
 
-if = {
-	limit = {
-		OR = {
-			has_dlc = "Together for Victory"
-			has_dlc = "Man the Guns"
-		}
-	}
-	set_autonomy = {
-		target = VIN
-		autonomous_state = autonomy_integrated_puppet
-		freedom_level = 0.60
-	}
-	else = {
-		puppet = VIN
-	}
+1910.1.1 = {
+	declare_war_on = {
+		target = CHA
+		type = annex_everything
+	}		
+    set_province_controller = 4978
+	set_province_controller = 3181
+	activate_mission = FRA_wadai_war_timer
 }
-# SPECIAL_DLC Together for Victory
 
-if = {
-	limit = {
-		has_dlc = "Man the Guns"
-	}
-	set_technology = { bicycle_infantry = 1 }
-}
+
+set_technology = { bicycle_infantry = 1 }
 give_guarantee = BEL # Treaty of London (1839)
 create_country_leader = { 
 	name = "Louis Frossard" 
 	picture = "gfx/leaders/FRA/FRA_louis_frossard.dds" 
 	expire = "1935.1.1" 
-	ideology = council_communism
-	traits = {} 
+	ideology = marxism
+	traits = { trait_marxism }  
 }
 create_country_leader = {
 	name = "Armand Fallières" 
 	picture = "gfx/leaders/FRA/FRA_armand_fallieres.dds" 
 	expire = "1935.1.1" 
 	ideology = conservatism
-	traits = {} 
+	traits = { trait_conservatism }  
 }
 create_country_leader = {
 	name = "Georges Valois" 
 	picture = "gfx/leaders/FRA/FRA_georges_valois.dds" 
 	expire = "1935.1.1" 
 	ideology = national_syndicalism
-	traits = {} 
+	traits = { trait_national_syndicalism }  
+}
+create_country_leader = {
+	name = "Maurice Pujo"
+	picture = "gfx/leaders/FRA/FRA_Maurice_Pujo.dds"
+	ideology = oligarchism
+	traits = {
+		monarchist_media_mogul
+		trait_oligarchism
+	}
 }
 
 create_field_marshal = {
@@ -68,15 +65,15 @@ create_field_marshal = {
 	logistics_skill = 3
 }
 
-create_field_marshal={
+create_corps_commander={
 	name = "Joseph Gallieni" id=32019
-	portrait_path="gfx/leaders/FRA/FRA_joseph_gallieni.dds"
-	traits={ defensive_doctrine old_guard }
+	portrait_path="gfx/leaders/FRA/FRA_Joseph_Gallieni.dds"
+	traits={ defensive_doctrine war_hero infantry_officer jungle_rat}
 	skill=4
 	attack_skill = 3
-	defense_skill = 2
+	defense_skill = 4
 	planning_skill = 4
-	logistics_skill = 4
+	logistics_skill = 2
 }
 
 create_field_marshal={
@@ -146,14 +143,22 @@ create_corps_commander={
 }
 
 create_corps_commander={
-	name = "Hubert Lyautey" id=32004
+	name = "Hubert Lyautey" 
+	id=32004
 	portrait_path="gfx/leaders/FRA/FRA_hubert_lyautey.dds"
-	traits={ }
-	skill=2
-	attack_skill = 1
+	traits={ 
+	    media_personality 
+		jungle_rat
+		desert_fox
+		cavalry_officer
+		trickster
+		commando
+	}
+	skill=3
+	attack_skill = 3
 	defense_skill = 1
-	planning_skill = 1
-	logistics_skill = 2
+	planning_skill = 3
+	logistics_skill = 3
 }
 
 create_corps_commander={
@@ -166,6 +171,64 @@ create_corps_commander={
 	planning_skill = 1
 	logistics_skill = 2
 }
+create_corps_commander = {
+	name = "Paul Leblois"
+	portrait_path = "gfx/leaders/FRA/FRA_paul_leblois.dds"
+	traits = {
+		infantry_officer
+		inflexible_strategist
+		trait_mountaineer
+	}
+	skill = 2
+	attack_skill = 2
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
+}
+create_corps_commander = {
+	name = "Henri Gouraud"
+	portrait_path = "gfx/leaders/FRA/FRA_Henri_Gouraud.dds"
+	traits = {
+		desert_fox
+		inflexible_strategist
+		media_personality
+		career_officer
+	}
+	skill = 3
+	attack_skill = 2
+	defense_skill = 3
+	planning_skill = 2
+	logistics_skill = 2
+}
+create_corps_commander = {
+	name = "Henri Berthelot"
+	portrait_path = "gfx/leaders/FRA/FRA_Henri_Berthelot.dds"
+	traits = {
+		organizer
+		brilliant_strategist
+	}
+	skill = 3
+	attack_skill = 3
+	defense_skill = 2
+	planning_skill = 3
+	logistics_skill = 2
+}
+create_corps_commander = {
+	name = "Charles Mangin"
+	portrait_path = "gfx/leaders/FRA/FRA_Charles_Mangin.dds"
+	traits = {
+		harsh_leader
+		jungle_rat
+		trait_reckless
+		media_personality
+	}
+	skill = 3
+	attack_skill = 3
+	defense_skill = 2
+	planning_skill = 2
+	logistics_skill = 3
+}
+
 
 create_navy_leader={
 	name = "Auguste Boué de Lapeyrère" id=32302
@@ -235,6 +298,7 @@ set_technology = {
 	#air
 	early_fighter = 1
 	airship_bomber = 1
+	scout_plane = 1
 		
 	#engineering
 	electrical_engineering = 1
@@ -569,6 +633,7 @@ if = {
 		improved_heavy_battery = 1
 		basic_torpedo = 1
 		sonar = 1
+		smoke_generator = 1
 		basic_secondary_battery = 1
 		improved_secondary_battery = 1
 		basic_cruiser_armor_scheme = 1
@@ -1420,4 +1485,3 @@ if = {
 		obsolete = yes
 	}
 }
-

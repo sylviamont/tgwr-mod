@@ -1,4 +1,16 @@
 spriteTypes = {
+    SpriteType = {
+		name = "GFX_focus_ger_HRE_estate"
+		texturefile = "gfx/interface/goals/focus_ger_HRE_estate.dds"
+	}
+    SpriteType = {
+		name = "GFX_focus_ger_HRE"
+		texturefile = "gfx/interface/goals/focus_ger_HRE.tga"
+	}
+    SpriteType = {
+		name = "GFX_focus_pol_pilsudski"
+		texturefile = "gfx/interface/goals/focus_pol_pilsudski.dds"
+	}
 	SpriteType = {
 		name = "GFX_focus_ita_enrico_corradini"
 		texturefile = "gfx/interface/goals/focus_ita_enrico_corradini.dds"
@@ -409,11 +421,6 @@ spriteTypes = {
 	}
 
 	SpriteType = {
-		name = "GFX_hoi4tgw_russianempire"
-		texturefile = "gfx/interface/goals/ww1_nationalfocus_russianempire.dds"
-	}
-
-	SpriteType = {
 		name = "GFX_hoi4tgw_wggrus"
 		texturefile = "gfx/interface/goals/ww1_nationalfocus_wggrus.dds"
 	}
@@ -506,10 +513,10 @@ spriteTypes = {
 		texturefile = "gfx/interface/goals/KOR/KOR_start_eagle_project.dds"			
 	}
 
-	SpriteType = {
-		name = "GFX_KOR_start_rearmament"
-		texturefile = "gfx/interface/goals/KOR/KOR_start_rearmament.dds"			
-	}
+	# SpriteType = {
+	# 	name = "GFX_KOR_start_rearmament"
+	# 	texturefile = "gfx/interface/goals/KOR/KOR_start_rearmament.dds"			
+	# }
 
 	SpriteType = {
 		name = "GFX_KOR_god_help_our_emperor"
@@ -632,8 +639,8 @@ spriteTypes = {
 	texturefile = "gfx/interface/goals/focus_red_aces.dds"			
 	}
     SpriteType = {
-	name = "GFX_focus_socialist_plane_factory"
-	texturefile = "gfx/interface/goals/focus_socialist_plane_factory.dds"			
+	name = "GFX_focus_plane_factory"
+	texturefile = "gfx/interface/goals/focus_plane_factory.dds"			
 	}
 	SpriteType = {
 	name = "GFX_focus_tur_socialist_education"
@@ -828,10 +835,6 @@ spriteTypes = {
 	texturefile = "gfx/interface/goals/focus_teskilat.dds"			
 	}
 	SpriteType = {
-	name = "GFX_focus_istirak_mukavemeti"
-	texturefile = "gfx/interface/goals/focus_istirak_mukavemeti.dds"			
-	}
-	SpriteType = {
 	name = "GFX_focus_hecnisuvar"
 	texturefile = "gfx/interface/goals/focus_hecnisuvar.dds"			
 	}
@@ -905,8 +908,8 @@ spriteTypes = {
 	texturefile = "gfx/interface/goals/focus_hunt_down_saudis.dds"			
 	}
 	SpriteType = {
-	name = "GFX_focus_sell_qatar"
-	texturefile = "gfx/interface/goals/focus_sell_qatar.dds"			
+	name = "GFX_focus_convention"
+	texturefile = "gfx/interface/goals/focus_convention.dds"			
 	}
 	SpriteType = {
 	name = "GFX_focus_attack_senussi"
@@ -929,16 +932,16 @@ spriteTypes = {
 	texturefile = "gfx/interface/goals/focus_jihad.dds"			
 	}
 	SpriteType = {
-	name = "GFX_focus_quran"
-	texturefile = "gfx/interface/goals/focus_quran.dds"			
+	name = "GFX_focus_TUR_religious_law"
+	texturefile = "gfx/interface/goals/focus_tur_religious_law.dds"			
 	}
 	SpriteType = {
 	name = "GFX_focus_otto_balkan_jandarm"
-	texturefile = "gfx/interface/goals/focus_otto_balkan_jandarm.dds"			
+	texturefile = "gfx/interface/goals/focus_otto_balkan_jandarm.dds"
 	}
 	SpriteType = {
 	name = "GFX_focus_tur_remove_western"
-	texturefile = "gfx/interface/goals/focus_tur_remove_western.dds"			
+	texturefile = "gfx/interface/goals/focus_tur_remove_western.dds"
 	}
 	SpriteType = {
 	name = "GFX_focus_remove_turk"
@@ -949,8 +952,8 @@ spriteTypes = {
 	texturefile = "gfx/interface/goals/focus_sharia.dds"			
 	}
 	SpriteType = {
-	name = "GFX_focus_sharia_management"
-	texturefile = "gfx/interface/goals/focus_sharia_management.dds"			
+	name = "GFX_focus_TUR_restore_caliphate_authority"
+	texturefile = "gfx/interface/goals/focus_tur_restore_caliphate_authority.dds"			
 	}
 	SpriteType = {
 	name = "GFX_focus_destroy_turanism"
@@ -965,15 +968,15 @@ spriteTypes = {
 	texturefile = "gfx/interface/goals/focus_tur_afganistan.dds"			
 	}
 	SpriteType = {
-	name = "GFX_focus_tur_iran"
-	texturefile = "gfx/interface/goals/focus_tur_iran.dds"			
+	name = "GFX_focus_TUR_strike_at_the_shia_base"
+	texturefile = "gfx/interface/goals/focus_tur_strike_at_the_shia_base.dds"			
 	}
 	SpriteType = {
 	name = "GFX_focus_pan_turanism"
 	texturefile = "gfx/interface/goals/focus_pan_turanism.dds"			
 	}
 	SpriteType = {
-	name = "GFX_focus_destroy_parliament"
+	name = "GFX_focus_destroy_parliament" 
 	texturefile = "gfx/interface/goals/focus_destroy_parliament.dds"			
 	}
 	SpriteType = {
@@ -1060,5 +1063,182 @@ spriteTypes = {
 	name = "GFX_focus_forest_railway"
 	texturefile = "gfx/interface/goals/focus_forest_railway.dds"			
 	}
+	SpriteType = {
+	name = "GFX_focus_ENG_parliament_act"
+	texturefile = "gfx/interface/goals/ENG_parliament_act.dds"
+	}
+	SpriteType = {
+	name = "GFX_focus_tur_constantinople_agreement"
+	texturefile = "gfx/interface/goals/focus_tur_constantinople_agreement.dds"
+	}
 
+	SpriteType = {
+	name = "GFX_focus_tur_focus_on_military_academy"
+	texturefile = "gfx/interface/goals/focus_tur_focus_on_military_academy.dds"
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_qaysari_rum_of_all_romans"
+	texturefile = "gfx/interface/goals/focus_tur_qaysari_rum_of_all_romans.dds"
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_proclaim_succession_of_roman_empire"
+	texturefile = "gfx/interface/goals/focus_tur_proclaim_succession_of_roman_empire.dds"
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_reclaim_mediterranean"
+	texturefile = "gfx/interface/goals/focus_tur_reclaim_mediterranean.dds"
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_mamma_li_turchi"
+	texturefile ="gfx/interface/goals/focus_tur_mamma_li_turchi.dds"	
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_legacy_of_the_sultanate_of_rum"
+	texturefile ="gfx/interface/goals/focus_tur_legacy_of_the_sultanate_of_rum.dds"	
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_prepare_for_the_greatest_siege"
+	texturefile ="gfx/interface/goals/focus_tur_prepare_for_the_greatest_siege.dds"	
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_fight_wahhabis"
+	texturefile ="gfx/interface/goals/focus_tur_fight_wahhabis.dds"	
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_restore_order_in_egypt"
+	texturefile ="gfx/interface/goals/focus_tur_restore_order_in_egypt.dds"	
+	}
+
+	SpriteType = {
+	name = "GFX_focus_tur_align_abyssinia"
+	texturefile ="gfx/interface/goals/focus_tur_align_abyssinia.dds"	
+	}	
+	SpriteType = {
+	name = "GFX_focus_tur_follow_the_dreams_of_great_mehmed"
+	texturefile ="gfx/interface/goals/focus_tur_follow_the_dreams_of_great_mehmed.dds"	
+	}	
+	SpriteType = {
+	name = "GFX_focus_tur_deport_minorities"
+	texturefile ="gfx/interface/goals/focus_tur_deport_minorities.dds"	
+	}
+	SpriteType = {
+		name = "GFX_focus_GER_bruderkrieg"
+		texturefile ="gfx/interface/goals/focus_GER_bruderkrieg.dds"	
+	}
+	SpriteType = {
+		name = "GFX_focus_GER_romanian_pact"
+		texturefile ="gfx/interface/goals/focus_ger_romanian_pact.dds"	
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_reform_ottoman_bank"
+		texturefile ="gfx/interface/goals/focus_tur_reform_ottoman_bank.dds"	
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_spirit_of_the_suleyman"
+		texturefile ="gfx/interface/goals/focus_tur_spirit_of_the_suleyman.dds"	
+	}
+	SpriteType = {
+		name = "GFX_focus_AUH_serbian_protectorate"
+		texturefile ="gfx/interface/goals/focus_auh_serbian_protectorate.dds"	
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_goeben_breslau"
+		texturefile = "gfx/interface/goals/focus_tur_goeben_breslau.tga"
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_restore_eyalet_egypt"
+		texturefile = "gfx/interface/goals/focus_tur_restore_eyalet_egypt.tga"
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_experience_of_mediterranean_conflict"
+		texturefile = "gfx/interface/goals/focus_tur_experience_of_mediterranean_conflict.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_south_america"
+		texturefile = "gfx/interface/goals/focus_south_america.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_secure_egypt"
+		texturefile = "gfx/interface/goals/focus_tur_secure_egypt.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_army_of_united_islam"
+		texturefile = "gfx/interface/goals/focus_tur_army_of_united_islam.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_TUR_the_war_drums"
+		texturefile = "gfx/interface/goals/focus_TUR_the_war_drums.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_take_ruthenia"
+		texturefile = "gfx/interface/goals/focus_take_ruthenia.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_union_south_africa"
+		texturefile = "gfx/interface/goals/focus_union_south_africa.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_crush_arabia"
+		texturefile = "gfx/interface/goals/focus_crush_arabia.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_looming_debts"
+		texturefile = "gfx/interface/goals/focus_looming_debts.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_islam_guns"
+		texturefile = "gfx/interface/goals/focus_islam_guns.dds" 
+	}
+	SpriteType = {
+		name = "GFX_focus_chi_people_defence"
+		texturefile = "gfx/interface/goals/focus_chi_people_defence.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_royal_question"
+		texturefile = "gfx/interface/goals/focus_royal_question.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_hold_elections"
+		texturefile = "gfx/interface/goals/focus_hold_elections.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_kill_hungary"
+		texturefile = "gfx/interface/goals/focus_kill_hungary.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_control_economy"
+		texturefile = "gfx/interface/goals/focus_control_economy.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_industry_steel"
+		texturefile = "gfx/interface/goals/focus_industry_steel.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_dead_economy"
+		texturefile = "gfx/interface/goals/focus_dead_economy.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_agrarian_profit"
+		texturefile = "gfx/interface/goals/focus_agrarian_profit.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_industry_profit"
+		texturefile = "gfx/interface/goals/focus_industry_profit.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_jewish_money"
+		texturefile = "gfx/interface/goals/focus_jewish_money.dds"
+	}
+	SpriteType = {
+		name = "GFX_focus_generic_train"
+		texturefile = "gfx/interface/goals/focus_generic_train.dds"
+	}
 }

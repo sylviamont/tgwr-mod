@@ -439,12 +439,12 @@ ideas={
 		}
 		BRA_jose_maria_da_silva_paranhos_junior={ 
 		    allowed={ 
-				tag=BRA 
+				original_tag=BRA 
 				NOT = { has_country_flag = bra_jose_paranhos_dies }
 			} 
 			traits={ traditionalist_theorist } 
 			ai_will_do={ factor=2 } 
-			available = {  OR={has_completed_focus = BRA_openly_support_the_monarchist_movement has_government = neutrality} NOT={has_government = communism} if = {limit = { has_dlc = "Man the Guns" } NOT = { has_country_flag = bra_jose_paranhos_dies }	NOT = { has_autonomy_state = autonomy_supervised_state }}}
+			available = {  OR={has_completed_focus = BRA_openly_support_the_monarchist_movement has_government = neutrality} NOT={has_government = communism} if = {limit = { has_dlc = "Man the Guns" } NOT = { has_country_flag = bra_jose_paranhos_dies }}}
 		}
 		BRA_lauro_severiano_muller={ 
 			allowed={ original_tag=BRA } 
@@ -516,7 +516,7 @@ ideas={
 		BRA_everardo_dias={ 
 			allowed={ original_tag=BRA } 
 			available = { has_government = communism }
-			traits={ princess_of_terror }		
+			traits={ prince_of_terror }		
 			ai_will_do={ factor=1 } 
 		}
 	}	

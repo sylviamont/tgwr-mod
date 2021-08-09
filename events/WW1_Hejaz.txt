@@ -1,43 +1,109 @@
 ﻿add_namespace = ww1_hejaz
-
+###Arabian revolt
 country_event = {
 	title = ww1_hejaz.7.t
 	desc = ww1_hejaz.7.d
 	id = ww1_hejaz.7
-	
 	fire_only_once = yes
 	is_triggered_only = yes
-	
 	immediate = {
 		set_global_flag = great_arabian_revolt
 		hidden_effect = {
 			if = {
-				limit = { owns_state = 679 } 
-				HJZ = { transfer_state = 679 }
+				limit = {
+					owns_state = 679
+				}
+				HJZ = {
+					transfer_state = 679
+				}
+				add_state_claim = 679
+				else = {
+					random_owned_state = {
+						limit = {
+							is_core_of = HJZ
+						}
+						HJZ = { transfer_state = PREV }						
+						ROOT = {
+							add_state_claim = PREV
+						}
+					}
+				}
+			}
+			HJZ = {
+				leave_faction = yes
+				load_oob = "HJZ_1910"
+				OVERLORD = {
+					end_puppet = HJZ
+				}
 			}
 			if = {
-				limit = { owns_state = 747 } 
-				ASR = { transfer_state = 747 }
+				limit = {
+					ASR = {
+						exists = no
+					}
+					any_owned_state = {
+						is_core_of = ASR			
+					}
+				}
+				ASR = {
+				    load_oob = "ASR_1910"
+					set_country_flag = arab_revolt_member			
+				}
+				if = {
+					limit = {
+						owns_state = 747
+					}
+					ASR = {
+						transfer_state = 747
+					}
+					add_state_claim = 747
+					else = {
+						random_owned_state = {
+							limit = {
+								is_core_of = ASR
+							}
+							ASR = { transfer_state = PREV }
+							ROOT = {
+								add_state_claim = PREV
+							}
+						}
+					}
+				}
 			}
 			if = {
-				limit = { owns_state = 293 } 
-				YEM = { transfer_state = 293 }
+				limit = {
+					YEM = {
+						exists = no
+					}
+					any_owned_state = {
+						is_core_of = YEM			
+					}
+				}
+				YEM = {
+				    load_oob = "YEM_1910"
+					set_country_flag = arab_revolt_member			
+				}
+				if = {
+					limit = {
+						owns_state = 293
+					}
+					YEM = {
+						transfer_state = 293
+					}
+					add_state_claim = 293
+					else = {
+						random_owned_state = {
+							limit = {
+								is_core_of = YEM
+							}
+							YEM = { transfer_state = PREV }							
+							ROOT = {
+								add_state_claim = PREV
+							}
+						}
+					}
+				}
 			}
-			if = {
-				limit = { HJZ = { is_puppet_of = TUR } } 
-				end_puppet = HJZ
-			}
-			if = {
-				limit = { ASR = { is_puppet_of = TUR } } 
-				end_puppet = ASR
-			}
-			if = {
-				limit = { YEM = { is_puppet_of = TUR } } 
-				end_puppet = YEM
-			}
-			HJZ = { leave_faction = yes load_oob = "HJZ_1910" }
-			ASR = { leave_faction = yes load_oob = "ASR_1910" }
-			YEM = { leave_faction = yes load_oob = "YEM_1910" }
 		}
 	}
 	option = {
@@ -46,35 +112,32 @@ country_event = {
 			target = HJZ
 			type = annex_everything
 		}
-		declare_war_on = {
-			target = ASR
-			type = annex_everything
-		}
-		declare_war_on = {
-			target = YEM
-			type = annex_everything
-		}
-		add_state_claim = 679
-		add_state_claim = 747
-		add_state_claim = 293
-		news_event = ww1_hejaz.8
-		ai_chance = {
-			factor = 50
-		}
-	}
-	option = {
-		name = ww1_hejaz.7.b
-		add_war_support = -0.10
-		add_stability = -0.10
-		ai_chance = { 
-			factor = 5 
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
+		if = {
+			limit = {
+				ASR = {
+					has_country_flag = arab_revolt_member
+				}
+			}
+			declare_war_on = {
+				target = ASR
+				type = annex_everything
 			}
 		}
+		if = {
+			limit = {
+				YEM = {
+					has_country_flag = arab_revolt_member
+				}
+			}
+			declare_war_on = {
+				target = YEM
+				type = annex_everything
+			}
+		}
+		news_event = ww1_hejaz.8
 	}
 }
+
 # Great Arabian Revolt
 ################
 news_event = {
@@ -82,19 +145,24 @@ news_event = {
 	title = ww1_hejaz.8.t
 	desc = ww1_hejaz.8.d
 	picture = GFX_news_event_042
-
 	major = yes
-	is_triggered_only = yes	
-
+	is_triggered_only = yes
 	option = {
 		name = ww1_hejaz.8.a
-		trigger = { NOT = { tag = TUR } }
+		trigger = {
+			NOT = {
+				tag = TUR
+			}
+		}
 	}
 	option = {
 		name = ww1_hejaz.8.b
-		trigger = { tag = TUR }
+		trigger = {
+			tag = TUR
+		}
 	}
 }
+
 # They are not released when Germany lose before triggering ww1_hejaz.7.
 country_event = {
 	id = ww1_hejaz.9
@@ -104,45 +172,229 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = TUR
-		has_global_flag = interbellum
 		TUR = {
+			OR = {
+				has_global_flag = versallies_treaty
+				has_global_flag = frankfurt_treaty
+			}
 			has_country_flag = great_war_loser
 			OR = {
-				owns_state = 293
-				owns_state = 679
-				owns_state = 747
+				any_owned_state = {
+					is_core_of = HJZ				
+				}
+				any_owned_state = {
+					is_core_of = ASR				
+				}
+				any_owned_state = {
+					is_core_of = YEM				
+				}
+				any_owned_state = {
+					is_core_of = SAU				
+				}
+				any_owned_state = {
+					is_core_of = LBA				
+				}
+				any_owned_state = {
+					is_core_of = JBS				
+				}
+				any_owned_state = {
+					is_core_of = KUW				
+				}
+				any_owned_state = {
+					is_core_of = QAT				
+				}
+				any_owned_state = {
+					is_core_of = PER				
+				}
+				any_owned_state = {
+					is_core_of = OMA				
+				}
+				any_owned_state = {
+					is_core_of = BUL	
+					NOT = {
+						is_core_of = TUR
+					}			
+				}
+				any_owned_state = {
+					is_core_of = SER
+					NOT = {
+						is_core_of = TUR
+					}				
+				}
+				any_owned_state = {
+					is_core_of = GRE
+					NOT = {
+						is_core_of = TUR
+					}				
+				}
+				any_owned_state = {
+					is_core_of = ALB
+					NOT = {
+						is_core_of = TUR
+					}				
+				}
+				any_owned_state = {
+					is_core_of = MNT
+					NOT = {
+						is_core_of = TUR
+					}				
+				}
 			}
 		}
 	}
 	immediate = {
 		hidden_effect = {
-			if = {
-				limit = { owns_state = 679 } 
-				HJZ = { transfer_state = 679 }
+			every_owned_state = {
+				limit = {
+					is_core_of = HJZ
+				}
+				HJZ = {
+					transfer_state = PREV
+				}
 			}
-			if = {
-				limit = { owns_state = 747 } 
-				ASR = { transfer_state = 747 }
+			every_owned_state = {
+				limit = {
+					is_core_of = ASR
+				}
+				ASR = {
+					transfer_state = PREV
+				}
 			}
-			if = {
-				limit = { owns_state = 293 } 
-				YEM = { transfer_state = 293 }
+			every_owned_state = {
+				limit = {
+					is_core_of = ASR
+				}
+				ASR = {
+					transfer_state = PREV
+				}
 			}
-			if = {
-				limit = { HJZ = { is_puppet_of = TUR } } 
-				end_puppet = HJZ
+			every_owned_state = {
+				limit = {
+					is_core_of = YEM
+				}
+				YEM = {
+					transfer_state = PREV
+				}
 			}
-			if = {
-				limit = { ASR = { is_puppet_of = TUR } } 
-				end_puppet = ASR
+			every_owned_state = {
+				limit = {
+					is_core_of = JBS
+				}
+				JBS = {
+					transfer_state = PREV
+				}
 			}
-			if = {
-				limit = { YEM = { is_puppet_of = TUR } } 
-				end_puppet = YEM
+			every_owned_state = {
+				limit = {
+					is_core_of = SAU
+				}
+				SAU = {
+					transfer_state = PREV
+				}
 			}
-			HJZ = { leave_faction = yes load_oob = "HJZ_1910" }
-			ASR = { leave_faction = yes load_oob = "ASR_1910" }
-			YEM = { leave_faction = yes load_oob = "YEM_1910" }
+			every_owned_state = {
+				limit = {
+					is_core_of = LBA
+				}
+				LBA = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = KUW
+				}
+				KUW = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = QAT
+				}
+				QAT = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = OMA
+				}
+				OMA = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = OMA
+				}
+				OMA = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = PER
+				}
+				PER = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = GRE
+					NOT = {
+						is_core_of = TUR
+					}
+				}
+				GRE = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = ALB
+					NOT = {
+						is_core_of = TUR
+					}
+				}
+				ALB = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = SER
+					NOT = {
+						is_core_of = TUR
+					}
+				}
+				SER = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = BUL
+					NOT = {
+						is_core_of = TUR
+					}
+				}
+				BUL = {
+					transfer_state = PREV
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = MNT
+					NOT = {
+						is_core_of = TUR
+					}
+				}
+				MNT = {
+					transfer_state = PREV
+				}
+			}
 		}
 	}
 }

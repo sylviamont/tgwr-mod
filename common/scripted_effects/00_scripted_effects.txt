@@ -452,27 +452,6 @@ GER_democratic_nations_ai_strategies = {
 		id = "CZE"
 		value = -200
 	}
-	# Yugoslavia
-	add_ai_strategy = {
-		type = ignore
-		id = "YUG"
-		value = 200
-	}
-	add_ai_strategy = {
-		type = protect
-		id = "YUG"
-		value = -200
-	}
-	add_ai_strategy = {
-		type = befriend
-		id = "YUG"
-		value = -200
-	}
-	add_ai_strategy = {
-		type = alliance
-		id = "YUG"
-		value = -200
-	}
 }
 
 print_variable_log_effect = {
@@ -874,57 +853,6 @@ instantiate_collaboration_government = {
 					}
 				}
 			}
-		}
-	}
-}
-
-abandon_colony_tag = {
-	if = {
-		limit = {
-			is_subject = yes
-		}
-		if = {
-			limit = {
-				original_tag = CAN
-			}
-			if = { 
-				limit = { NOT = { has_dlc = "Together for Victory" } }
-				set_cosmetic_tag = CAN_ALY
-			}
-			else = {
-				set_cosmetic_tag = CAN_UK
-			}
-		}
-		else_if = {
-			limit = {
-				original_tag = RAJ
-			}
-			set_cosmetic_tag = RAJ_UK
-		}
-		else_if = {
-			limit = {
-				original_tag = MAL
-			}
-			set_cosmetic_tag = MAL_UK
-		}
-		else_if = {
-			limit = {
-				original_tag = INS
-			}
-			set_cosmetic_tag = INS_HOL
-		}
-	}
-	else = {
-		if = {
-			limit = {
-				OR = {
-					has_cosmetic_tag = united_polynesia
-					has_cosmetic_tag = MAJ_UNIFIED
-				}
-			}
-		}
-		else = {
-			drop_cosmetic_tag = yes
 		}
 	}
 }

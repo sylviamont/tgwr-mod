@@ -11,6 +11,16 @@ infantry_CHI = {
 		SIK
 		MEN
 		MAN
+		ANC
+		FNG
+		GDC
+		GMJ
+		GZC
+		HNC
+		JNC
+		JXC
+		QIN
+		SCC
 	}
 
 	roles = {

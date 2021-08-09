@@ -1,64 +1,71 @@
 JAP_dont_go_to_europe = {
 	allowed = { original_tag = JAP }
 	enable = {		
-		JAP = {
-			OR = {
-				is_in_faction_with = FRA
-				has_war_with = GER
-			}
-		}
-		date < 1918.1.1
+		always = yes
 	}
-	
 	abort = {
-		OR = {
-			date > 1919.1.1
-			JAP = {
-				OR = {
-					has_war_with = SOV 
-					has_war_with = CHI
-					has_war_with = QIN
-				}
-			}
-		}
+		always = no
 	}
-	
 	ai_strategy = {
 		type = area_priority
 		id = north_america
-		value = -500
+		value = -9999
 	}
-	
+	ai_strategy = {
+        type = front_unit_request
+        area = north_america
+        value = -9999
+    }
 	ai_strategy = {
 		type = area_priority
 		id = south_america
-		value = -500
+		value = -9999
 	}
-	
+	ai_strategy = {
+        type = front_unit_request
+        area = south_america
+        value = -9999
+    }
 	ai_strategy = {
 		type = area_priority
 		id = asia
-		value = 1000
+		value = 9999
 	}
-	
+	ai_strategy = {
+        type = front_unit_request
+        area = asia
+        value = 9999
+    }
 	ai_strategy = {
 		type = area_priority
 		id = europe
-		value = -5000
+		value = -9999
 	}
-	
+	ai_strategy = {
+        type = front_unit_request
+        area = europe
+        value = -9999
+    }
 	ai_strategy = {
 		type = area_priority
 		id = middle_east
-		value = -5000
+		value = -9999
 	}
-	
+	ai_strategy = {
+        type = front_unit_request
+        area = middle_east
+        value = -9999
+    }
 	ai_strategy = {
 		type = area_priority
 		id = africa
-		value = -5000
+		value = -9999
 	}
-
+	ai_strategy = {
+        type = front_unit_request
+        area = africa
+        value = -9999
+    }
 }
 
 JAP_dont_send_volunteers = {
@@ -169,119 +176,35 @@ JAP_invade_german_qingdao = {
 		has_war_with = GER
 		NOT = { owns_state = 745 }
 	}
+	abort_when_not_enabled = yes
 	abort = {
 		owns_state = 745
 	}
-	
 	ai_strategy = {
-		type = front_control
-
-		state = 745
-		state = 684
-		state = 633
-		state = 648
-		state = 647
-		
-		priority = 100
-		
-		ordertype = invasion
-		execute_order = yes
-	}	
-	ai_strategy = {
-		type = front_control
-
-		state = 745
-		
-		priority = 100
-		
-		ordertype = invasion
-		execute_order = no
-	}
-	ai_strategy = {
-		type = front_control
-
-		state = 684
-		
-		priority = 100
-		
-		ordertype = invasion
-		execute_order = no
-	}
-	ai_strategy = {
-		type = front_control
-
-		state = 633
-		
-		priority = 100
-		
-		ordertype = invasion
-		execute_order = no
-	}
-	ai_strategy = {
-		type = front_control
-
-		state = 648
-		
-		priority = 100
-		
-		ordertype = invasion
-		execute_order = no
-	}
-	ai_strategy = {
-		type = front_control
-
-		state = 647
-		
-		priority = 100
-		
-		ordertype = invasion
-		execute_order = no
-	}
-	
-	ai_strategy = {
-		type = put_unit_buffers
-		
-		order_id = 1
-		
-		states = {
-			745
-			684
-			633
-			648
-			647
+        type = invasion_unit_request
+		state_trigger = {
+			state = 745	
 		}
-		
-		ratio = 0.5
-	}
-}
-JAP_actually_invade_qingdao_hopefully = {
-	enable = {
-		original_tag = JAP
-		has_war_with = GER
-		NOT = { owns_state = 745 }
-		NOT = { country_exists = OST }
-	}
-	
-	abort = {
-		controls_state = 745
-		controls_state = 684
-		controls_state = 633
-		controls_state = 648
-		controls_state = 647
-	}
-	
+        value = 2000
+    }
 	ai_strategy = {
-		type = invade
-		id = GER
-		value = 1000
-	}
+        type = invasion_unit_request
+		state_trigger = {
+			OR = {
+				state = 684
+				state = 633
+				state = 648
+				state = 647
+			}	
+		}
+        value = 500
+    }
 }
 JAP_invade_qingdao_ost = {
 	enable = {
 		original_tag = JAP
-		has_war_with = GER
+		has_war_with = OST
 		NOT = { owns_state = 745 }
-		country_exists = OST
 	}
 	ai_strategy = {
 		type = invade
@@ -296,7 +219,7 @@ JAP_invade_qingdao_ost = {
 		controls_state = 647
 	}
 }
-JAP_build_army = {
+JAP_build_armies = {
 	enable = {
 		original_tag = JAP
 	}
@@ -305,6 +228,6 @@ JAP_build_army = {
 	}
 	ai_strategy = {
 		type = force_build_armies
-		value = 200
+		value = 999
 	}
 }
